@@ -1,0 +1,1324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Two Problems, Done by Hand</title>
+<style>
+
+  /* ============================================================================
+     Two palettes, one set of roles. The names below are structural, not literal:
+       --bitumen    the page ground        --ink / --ink-dim   prose
+       --bitumen-2  a raised surface       --clay / --clay-mid numbers and data
+       --groove     hairlines              --faint             de-emphasised text
+       --gold       the value in play      --lapis             what you are told
+       --carnelian  the miss               --reed              agreement / success
+
+     LIGHT is Gypsum & Indigo: noon glare on plaster, iron-gall ink.
+     DARK  is Basalt & Verdigris: volcanic rock after dark, oxidised copper.
+
+     Every colour in the file resolves through these. If you add one, add a token
+     rather than a literal, or the other mode will break.
+     To pin a mode for projection, put data-theme="light" or "dark" on <html>.
+     ============================================================================ */
+  :root{
+    color-scheme:light;
+
+    --bitumen:#f2ece0;
+    --bitumen-2:#e7dfcf;
+    --clay:#5c4a33;
+    --clay-mid:#7d6849;
+    --groove:#c3b49a;
+    --faint:#7d6c52;
+    --lapis:#2f4b7c;
+    --lapis-dim:#6a80a6;
+    --gold:#8a5c1c;
+    --carnelian:#a83a25;
+    --reed:#5f7143;
+    --ink:#2b2118;
+    --ink-dim:#6b5c49;
+
+    /* Derived: hairlines, sunken panels, tinted fills. */
+    --line:rgba(92,74,51,0.22);
+    --line-soft:rgba(92,74,51,0.14);
+    --line-firm:rgba(92,74,51,0.38);
+    --sunk:#e2d8c4;
+    --on-gold:#f7f2e6;
+    --gold-wash:rgba(138,92,28,0.12);
+    --clay-wash:rgba(92,74,51,0.18);
+    --carnelian-wash:rgba(168,58,37,0.10);
+    --carnelian-wash-2:rgba(168,58,37,0.16);
+    --reed-wash:rgba(95,113,67,0.15);
+    --shadow:rgba(60,45,25,0.30);
+
+    /* The drawn lamp on the cover, when the 1909 plate is not there to stand in. */
+    --art-sky-1:#e6dcc4;
+    --art-sky-2:#f4efe4;
+    --art-dune-1:#dccfb2;
+    --art-dune-2:#cfc0a0;
+    --art-plume-1:#8b7f6b;
+    --art-plume-2:#a99c86;
+    --art-plume-3:#b8ab95;
+    --art-brass:#a8804a;
+    --art-brass-dim:#7d5c30;
+    --art-mouth:#6b5535;
+
+    --display:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+    --body:Inter,ui-sans-serif,system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    --data:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+
+  /* Basalt & Verdigris. Defined twice on purpose: once for the system preference,
+     once for an explicit data-theme="dark". Keep the two blocks identical. */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --bitumen:#0e1211;
+      --bitumen-2:#171d1c;
+      --clay:#cfd3cb;
+      --clay-mid:#9aa39b;
+      --groove:#4a5551;
+      --faint:#7c8983;
+      --lapis:#6fa8a0;
+      --lapis-dim:#47716c;
+      --gold:#c9a227;
+      --carnelian:#bf5b4b;
+      --reed:#7fae6a;
+      --ink:#eef1ea;
+      --ink-dim:#8d968f;
+
+      --line:rgba(150,168,160,0.20);
+      --line-soft:rgba(150,168,160,0.12);
+      --line-firm:rgba(150,168,160,0.32);
+      --sunk:#080b0a;
+      --on-gold:#0e1211;
+      --gold-wash:rgba(201,162,39,0.10);
+      --clay-wash:rgba(207,211,203,0.16);
+      --carnelian-wash:rgba(191,91,75,0.12);
+      --carnelian-wash-2:rgba(191,91,75,0.18);
+      --reed-wash:rgba(127,174,106,0.13);
+      --shadow:rgba(0,0,0,0.85);
+
+      --art-sky-1:#1b2321;
+      --art-sky-2:#0e1211;
+      --art-dune-1:#161d1c;
+      --art-dune-2:#111716;
+      --art-plume-1:#232c2a;
+      --art-plume-2:#46534f;
+      --art-plume-3:#56645f;
+      --art-brass:#9aa39b;
+      --art-brass-dim:#5f6b66;
+      --art-mouth:#080b0a;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --bitumen:#0e1211;
+    --bitumen-2:#171d1c;
+    --clay:#cfd3cb;
+    --clay-mid:#9aa39b;
+    --groove:#4a5551;
+    --faint:#7c8983;
+    --lapis:#6fa8a0;
+    --lapis-dim:#47716c;
+    --gold:#c9a227;
+    --carnelian:#bf5b4b;
+    --reed:#7fae6a;
+    --ink:#eef1ea;
+    --ink-dim:#8d968f;
+
+    --line:rgba(150,168,160,0.20);
+    --line-soft:rgba(150,168,160,0.12);
+    --line-firm:rgba(150,168,160,0.32);
+    --sunk:#080b0a;
+    --on-gold:#0e1211;
+    --gold-wash:rgba(201,162,39,0.10);
+    --clay-wash:rgba(207,211,203,0.16);
+    --carnelian-wash:rgba(191,91,75,0.12);
+    --carnelian-wash-2:rgba(191,91,75,0.18);
+    --reed-wash:rgba(127,174,106,0.13);
+    --shadow:var(--shadow);
+
+    --art-sky-1:#1b2321;
+    --art-sky-2:#0e1211;
+    --art-dune-1:#161d1c;
+    --art-dune-2:#111716;
+    --art-plume-1:#232c2a;
+    --art-plume-2:#46534f;
+    --art-plume-3:#56645f;
+    --art-brass:#9aa39b;
+    --art-brass-dim:#5f6b66;
+    --art-mouth:#080b0a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;font-family:var(--body);background:var(--bitumen);color:var(--ink)}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  main{width:100%;padding:0 64px}
+  @media (max-width:700px){main{padding:0 24px}}
+  .page{display:block}
+
+  /* Slides */
+  .segment{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:96px 0;scroll-snap-align:start}
+  .segment.slide-scroll{height:100vh;overflow:hidden auto;display:block;scroll-snap-align:start}
+  .segment-inner{width:100%;max-width:1180px;margin:0 auto}
+
+  /* Structural device: a ruled line with a stylus wedge, the way tablets divide their columns. */
+  .rule{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+  .rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--groove),transparent);max-width:520px}
+  .wedge{width:10px;height:11px;background:var(--gold);clip-path:polygon(0 0,100% 50%,0 100%);flex-shrink:0}
+  .rule-label{font-family:var(--data);font-size:10.5px;letter-spacing:0.3em;text-transform:uppercase;color:var(--ink-dim)}
+  .lc{text-transform:none}
+
+/* Act markers: big enough to read as a chapter break, not a caption. */
+.act-mark{display:block;font-family:var(--display);font-weight:500;font-style:italic;
+          font-size:clamp(26px,3vw,40px);line-height:1;color:var(--gold);margin:0 0 14px 0}
+.act-mark::after{content:"";display:block;width:64px;height:2px;background:var(--gold);
+                 margin-top:16px;opacity:0.55}
+  .segment-heading{font-family:var(--display);font-weight:500;font-size:clamp(30px,3.6vw,50px);letter-spacing:0.005em;line-height:1.15;margin:0 0 16px 0;color:var(--ink)}
+  .segment-lead{color:var(--ink-dim);font-size:16.5px;line-height:1.7;margin:0 0 30px 0;max-width:74ch}
+  .segment-lead strong{color:var(--ink);font-weight:600}
+  p{line-height:1.7;color:var(--ink-dim)}
+  h1,h2,h3{font-family:var(--display);font-weight:500;color:var(--ink)}
+  em{color:var(--clay)}
+  code{font-family:var(--data);font-size:0.88em;color:var(--gold);background:var(--gold-wash);padding:1px 6px;border-radius:2px}
+
+  /* Surfaces: dark stone recesses, never gradients. */
+  .recess{background:var(--bitumen-2);border:1px solid var(--line);border-radius:3px;padding:22px 26px}
+  .note{border-left:2px solid var(--lapis);padding-left:22px;max-width:800px}
+  .note-tag{display:block;font-family:var(--data);font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--lapis);margin-bottom:12px}
+  .note p{margin:0;color:var(--ink);font-size:16px;line-height:1.7}
+  .note p + p{margin-top:14px}
+  .note p.aside{color:var(--ink-dim);font-size:15px}
+  .note.gold{border-left-color:var(--gold)}
+  .note.gold .note-tag{color:var(--gold)}
+  .formula{font-family:var(--data);font-size:clamp(17px,2vw,22px);color:var(--gold);letter-spacing:0.05em;line-height:1.85;margin:6px 0 16px 0}
+  .formula .par{color:var(--clay)}
+  .formula .sig{color:var(--lapis)}
+  .formula .rate{color:var(--reed)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.26s}
+  .reveal.d3{transition-delay:.40s}.reveal.d4{transition-delay:.54s}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}
+    .smoke-curl{animation:none}.lamp-glow{animation:none}
+    .endcard{animation:none}.dot{transition:none}}
+
+  /* ===== Cover ===== */
+  .hero{min-height:100vh;display:flex;align-items:center;scroll-snap-align:start;padding:96px 0}
+  .hero-inner{max-width:1180px;margin:0 auto;width:100%;display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center}
+  @media (max-width:980px){.hero-inner{grid-template-columns:1fr;gap:34px}.hero-art{order:-1;max-width:340px;margin:0 auto}}
+  .hero-eyebrow{font-family:var(--data);font-size:11px;letter-spacing:0.34em;text-transform:uppercase;color:var(--gold);margin:0 0 26px 0}
+  .hero-title{font-family:var(--display);font-weight:400;font-size:clamp(42px,5.6vw,76px);line-height:1.05;letter-spacing:0.01em;margin:0 0 26px 0;color:var(--ink)}
+  .hero-title .lit{color:var(--gold);font-style:italic}
+  .hero-sub{margin:0;font-size:17px;line-height:1.75;color:var(--ink-dim);max-width:52ch}
+  .hero-formula{font-family:var(--data);font-size:22px;color:var(--gold);letter-spacing:0.06em;margin:26px 0 0 0}
+  .hero-art{width:100%}
+  .hero-art svg{width:100%;height:auto;display:block}
+  .art-credit{font-family:var(--data);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint);margin:14px 0 0 0;text-align:center}
+  .art-credit em{color:var(--clay-mid);font-style:italic}
+  /* The plate carries the 1909 painting; if the file is missing the drawn lamp
+     stands in for it, so the cover never opens on a broken image. */
+  .plate{margin:0}
+  .plate img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:2px}
+  .plate .plate-drawn{display:none}
+  .plate .cap-drawn{display:none}
+  .plate.drawn img{display:none}
+  .plate.drawn .plate-drawn{display:block}
+  .plate.drawn .cap-photo{display:none}
+  .plate.drawn .cap-drawn{display:inline}
+  .smoke-curl{animation:curl 9s ease-in-out infinite}
+  .smoke-curl.s2{animation-duration:11s;animation-delay:-3s}
+  .smoke-curl.s3{animation-duration:13s;animation-delay:-6s}
+  @keyframes curl{0%,100%{transform:translateX(0) scaleX(1)}50%{transform:translateX(5px) scaleX(1.04)}}
+  .lamp-glow{animation:glow 4.5s ease-in-out infinite}
+  @keyframes glow{0%,100%{opacity:0.45}50%{opacity:0.9}}
+
+  /* ===== The bargain cards ===== */
+  .terms{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;max-width:960px}
+  @media (max-width:820px){.terms{grid-template-columns:1fr}}
+  .term{background:var(--bitumen-2);padding:22px 24px}
+  .term-n{font-family:var(--data);font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin:0 0 10px 0}
+  .term p{margin:0;font-size:15px;line-height:1.65;color:var(--ink)}
+  .term p.sub{margin-top:8px;color:var(--ink-dim);font-size:14px}
+
+  /* ===== Working panels ===== */
+  .stage{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:start;position:relative}
+  /* Grid items must be allowed to shrink, or the scrolling tables inside them
+     force the whole track to their natural width. */
+  .stage > *{min-width:0}
+  .stage.split{grid-template-columns:1fr 1fr}
+  @media (max-width:980px){.stage,.stage.split{grid-template-columns:1fr;gap:28px}}
+  .control{display:flex;flex-direction:column;gap:20px;min-width:0}
+  .field{display:flex;flex-direction:column;gap:9px}
+  .field label{font-family:var(--data);font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-dim)}
+  .field input[type=number]{width:100%;padding:12px 14px;border-radius:2px;background:var(--sunk);color:var(--clay);border:1px solid var(--line-firm);font-family:var(--data);font-size:17px}
+  .field input[type=number]:focus{outline:none;border-color:var(--gold)}
+  .field input:disabled{opacity:0.4;cursor:not-allowed}
+  .press{width:100%;padding:13px 18px;border-radius:2px;border:1px solid var(--gold);cursor:pointer;font-family:var(--data);font-size:11.5px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);background:transparent;transition:background .18s,color .18s}
+  .press:hover{background:var(--gold);color:var(--on-gold)}
+  .press:focus-visible{outline:2px solid var(--lapis);outline-offset:3px}
+  .press:disabled{opacity:0.35;cursor:not-allowed;border-color:var(--line-firm);color:var(--ink-dim)}
+  .press:disabled:hover{background:transparent;color:var(--ink-dim)}
+  .press.quiet{border-color:var(--line-firm);color:var(--ink-dim)}
+  .press.quiet:hover{background:transparent;border-color:var(--clay-mid);color:var(--clay)}
+  .pressrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media (max-width:520px){.pressrow{grid-template-columns:1fr}}
+  .readout{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-top:4px;border-top:1px solid var(--line)}
+  .readout .k{font-family:var(--data);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-dim);margin:14px 0 7px 0}
+  .readout .v{font-family:var(--data);font-size:25px;color:var(--clay);line-height:1;overflow:hidden;text-overflow:ellipsis}
+  .readout .v.small{font-size:19px}
+
+  /* Slider, in the same ruled idiom as everything else */
+  .slider{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:var(--groove);border-radius:0;outline:none;margin:8px 0 2px 0}
+  .slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;border:none}
+  .slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;border:none}
+  .slider:disabled::-webkit-slider-thumb{background:var(--groove);cursor:not-allowed}
+  .slider:disabled::-moz-range-thumb{background:var(--groove);cursor:not-allowed}
+  .slider-val{font-family:var(--data);font-size:15px;color:var(--gold)}
+  .check{display:flex;align-items:flex-start;gap:11px;cursor:pointer;font-size:14px;line-height:1.55;color:var(--ink-dim)}
+  .check input{margin-top:3px;accent-color:var(--gold);flex-shrink:0}
+  .check strong{color:var(--clay);font-weight:600}
+
+  /* ===== Ruled number columns ===== */
+  .cols{overflow-x:auto;border-top:1px solid var(--groove);border-bottom:1px solid var(--groove)}
+  .cols.tall{max-height:264px;overflow-y:auto}
+  table.ruled{width:100%;border-collapse:collapse;font-family:var(--data);font-size:12.5px}
+  table.ruled th{position:sticky;top:0;z-index:3;background:var(--bitumen);text-align:right;padding:11px 16px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-dim);font-weight:400;border-bottom:1px solid var(--groove);white-space:nowrap}
+  table.ruled td{text-align:right;padding:9px 16px;border-bottom:1px solid var(--line-soft);color:var(--clay);white-space:nowrap}
+  table.ruled tr:last-child td{border-bottom:none}
+  table.ruled th + th,table.ruled td + td{border-left:1px solid var(--line-soft)}
+  table.ruled .over{color:var(--carnelian)}
+  table.ruled .under{color:var(--lapis)}
+  table.ruled .hit{color:var(--reed)}
+  table.ruled .empty{text-align:center;color:var(--faint);padding:26px;font-family:var(--body);font-size:13.5px;border-left:none}
+
+  /* Pseudocode: lines scroll rather than wrap. */
+  .recipe{font-family:var(--data);font-size:14.5px;line-height:2.1;margin:6px 0 0 0;
+          color:var(--ink);white-space:nowrap;overflow-x:auto;padding-bottom:4px}
+  .recipe .note-com{color:var(--faint);font-style:italic}
+  .recipe .kw{color:var(--lapis)}
+  .recipe .chg{color:var(--carnelian)}
+  .recipe .chg-com{color:var(--carnelian);font-style:italic}
+
+  /* ===== Stacked fractions =====
+     The deterministic run is exact rational arithmetic, so the columns print
+     13/8 rather than 1.625 for as long as the numbers stay legible. */
+  .frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;
+        line-height:1.15;font-family:var(--data)}
+  .frac .fn-num{padding:0 3px}
+  .frac .fn-den{padding:0 3px;border-top:1px solid currentColor;margin-top:1px}
+  td .frac,th .frac{font-size:0.95em}
+  .sign{display:inline-block;min-width:0.7em;text-align:right}
+
+  /* The run table is the main event here, so it is wider-set than the ruled
+     columns elsewhere and its rows breathe. */
+  table.ruled.run td{padding:14px 18px;font-size:13.5px}
+  table.ruled.run th{padding:12px 18px;text-transform:none;letter-spacing:0.08em;font-size:11.5px;
+                     text-align:right;color:var(--ink)}
+  table.ruled.run td.q{color:var(--ink)}
+  table.ruled.run td.target{color:var(--clay)}
+  /* Side-by-side traces: one fixed row height so the two panels stay in step,
+     whether a cell holds a stacked fraction or a plain decimal. */
+  table.ruled.run.cmp td{height:58px;padding-top:0;padding-bottom:0}
+  table.ruled.run.cmp th{padding-top:12px;padding-bottom:12px}
+  table.ruled.run .neg{color:var(--lapis)}
+  table.ruled.run .pos{color:var(--carnelian)}
+
+  /* The curved arrow that says: the target you were just handed is the next guess. */
+  .flow{position:relative;padding-left:158px}
+  @media (max-width:1100px){.flow{padding-left:0}}
+  .flow svg.flow-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+  .flow svg.flow-line path{fill:none;stroke:var(--faint);stroke-width:1.4}
+  .flow svg.flow-line text{fill:var(--faint);font-family:var(--display);font-size:13px;font-style:italic}
+
+  /* Act I's rectangle-versus-square figure, in this palette. */
+  .sq-target{fill:none;stroke:var(--lapis);stroke-width:2;stroke-dasharray:5 4}
+  .sq-guess{fill:var(--clay-wash);stroke:var(--clay);stroke-width:2}
+  .lbl-area{fill:var(--lapis);font-family:var(--data);font-size:11px;letter-spacing:0.06em}
+
+/* ===== Act II's guessing tablet (ported from Act I) ===== */
+.fig .fig-zoom{width:auto;padding:8px 16px;font-size:10px;letter-spacing:0.2em;opacity:0;transform:translateY(-4px);
+               pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.2,.7,.2,1),background .18s,color .18s}
+.fig-zoom.show{opacity:1;transform:none;pointer-events:auto}
+.press:disabled:not(.fig-zoom){opacity:0.35;cursor:not-allowed;border-color:var(--line-firm);color:var(--ink-dim)}
+#g_arealbl{transition:opacity .4s ease}
+#g_fig{max-width:340px;margin:0 auto;display:block}
+.sq-guess{transition:all .3s cubic-bezier(.2,.7,.2,1)}
+/* The correction is a step the student takes, not one they read: the newest row
+   offers both directions and glows until one of them is chosen. */
+table.ruled td.choose{padding:6px 10px;white-space:nowrap}
+.corr{font-family:var(--data);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;background:transparent;
+      border:1px solid;border-radius:2px;padding:6px 10px;margin:0 3px;cursor:pointer;
+      transition:background .18s,color .18s,box-shadow .18s}
+.corr[data-dir="up"]{color:var(--lapis);border-color:var(--lapis-dim)}
+.corr[data-dir="down"]{color:var(--carnelian);border-color:var(--carnelian)}
+.corr[data-dir="up"]:hover{background:var(--lapis);color:var(--on-gold)}
+.corr[data-dir="down"]:hover{background:var(--carnelian);color:var(--on-gold)}
+.corr:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.corr.pulse{animation:corr-glow 1.7s ease-in-out infinite}
+.corr.wrong{animation:corr-shake .4s ease}
+@keyframes corr-glow{0%,100%{box-shadow:0 0 0 0 var(--gold-wash)}50%{box-shadow:0 0 0 3px var(--gold-wash)}}
+@keyframes corr-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}
+                      60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion: reduce){
+  .corr.pulse{animation:none;box-shadow:0 0 0 2px var(--gold-wash)}
+  .corr.wrong{animation:none}
+  .fig-zoom{transition:none}#g_arealbl{transition:none}.sq-guess{transition:none}
+}
+
+  /* ===== Figures ===== */
+  .fig{display:flex;flex-direction:column;gap:12px}
+  .fig svg{width:100%;height:auto;display:block}
+  .fig-caption{font-family:var(--data);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin:0}
+  .dot{transition:cx .45s cubic-bezier(.2,.7,.2,1)}
+  .axis{stroke:var(--groove);stroke-width:1}
+  .tick-lbl{fill:var(--ink-dim);font-family:var(--data);font-size:10px}
+  .lbl{fill:var(--ink-dim);font-family:var(--data);font-size:11px}
+  .voice{font-family:var(--data);font-size:14px;line-height:1.6;color:var(--ink-dim);min-height:44px;border-left:2px solid var(--groove);padding-left:14px}
+  .voice b{color:var(--clay);font-weight:500}
+  .voice .up{color:var(--lapis)}
+  .voice .down{color:var(--carnelian)}
+
+  /* ===== End card over the panel ===== */
+  .stage.done .control,.stage.done .stage-right{opacity:0.32;pointer-events:none;filter:grayscale(0.35);transition:opacity .3s,filter .3s}
+  .endcard{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;width:100%;max-width:470px;background:var(--bitumen-2);border:1px solid var(--gold);border-radius:3px;padding:30px 32px;text-align:center;box-shadow:0 24px 60px -12px var(--shadow);animation:pop .32s cubic-bezier(.2,.7,.2,1)}
+  .endcard[hidden]{display:none}
+  @keyframes pop{from{transform:translate(-50%,-50%) scale(.94);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
+  .endcard .wedge{margin:0 auto 14px auto;width:14px;height:16px}
+  .end-title{font-family:var(--display);font-size:24px;margin:0 0 12px 0;color:var(--ink)}
+  .end-row{font-size:15px;color:var(--ink-dim);margin:7px 0;line-height:1.6}
+  .end-row b{font-family:var(--data);color:var(--gold);font-weight:400}
+  .end-fib{font-family:var(--data);font-size:12px;color:var(--clay);letter-spacing:0.04em;line-height:1.9;margin:16px 0 0 0;word-spacing:0.2em}
+  .end-actions{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .end-actions .press{width:auto;padding:11px 22px}
+
+  /* ===== Exercise ===== */
+  .task{border-left:2px solid var(--gold);padding-left:22px;margin:0 0 26px 0;max-width:840px}
+  .task h3{margin:0 0 10px 0;font-size:17px;letter-spacing:0.01em}
+  .task p{margin:8px 0;color:var(--ink-dim);font-size:15.5px}
+  .task ul{margin:10px 0 0 0;padding-left:18px;color:var(--ink-dim);font-size:15.5px}
+  .task li{margin:6px 0;line-height:1.6}
+  .task li strong{color:var(--clay)}
+  pre.tablet-code{background:var(--sunk);border:1px solid var(--line);border-radius:3px;padding:22px 24px;overflow-x:auto;font-family:var(--data);font-size:13px;line-height:1.9;color:var(--ink)}
+  pre.tablet-code .kw{color:var(--lapis)}
+  pre.tablet-code .fn{color:var(--gold)}
+  pre.tablet-code .cls{color:var(--reed)}
+  pre.tablet-code .num{color:var(--reed)}
+  pre.tablet-code .str{color:var(--clay-mid)}
+  pre.tablet-code .com{color:var(--faint);font-style:italic}
+  .out-tag{display:block;margin:28px 0 10px;font-family:var(--data);font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-dim)}
+  pre.out{margin:0;background:var(--sunk);border:1px solid var(--line);border-left:2px solid var(--reed);border-radius:3px;padding:18px 22px;overflow-x:auto;font-family:var(--data);font-size:12.5px;line-height:1.8;color:var(--ink)}
+  pre.out .pr{color:var(--ink-dim)}
+  pre.out .rv{color:var(--lapis)}
+  pre.tablet-code input.inline{font-family:inherit;font-size:inherit;background:var(--carnelian-wash);color:var(--clay);border:none;border-bottom:1px solid var(--carnelian);border-radius:0;padding:2px 6px;outline:none;min-width:210px}
+  pre.tablet-code input.inline:focus{background:var(--gold-wash);border-bottom-color:var(--gold)}
+  pre.tablet-code input.inline.ok{background:var(--reed-wash);border-bottom-color:var(--reed);color:var(--reed)}
+  pre.tablet-code input.inline.bad{background:var(--carnelian-wash-2);border-bottom-color:var(--carnelian)}
+  .btnrow{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;align-items:center}
+  .hint-link{background:none;border:0;padding:2px 0;margin-left:10px;font-family:var(--data);font-size:12px;letter-spacing:0.05em;color:var(--ink-dim);cursor:pointer;border-bottom:1px dotted var(--line-firm);transition:opacity .18s,color .18s,border-color .18s}
+  .hint-link:hover{color:var(--clay);border-bottom-color:var(--clay-mid)}
+  .hint-link:focus-visible{outline:2px solid var(--lapis);outline-offset:3px}
+  .btnrow .press{width:auto;padding:12px 26px}
+  .msg{margin-top:16px;font-size:14px;line-height:1.6;display:none;padding-left:14px;border-left:2px solid transparent}
+  .msg.bad{display:block;border-left-color:var(--carnelian);color:var(--carnelian)}
+  .msg.ok{display:block;border-left-color:var(--reed);color:var(--reed)}
+  .msg.tip{display:block;border-left-color:var(--lapis);color:var(--ink-dim)}
+  .aside-hint{margin-top:18px;padding-left:15px;border-left:1px solid var(--line-firm);color:var(--ink-dim);font-size:13.5px;line-height:1.8;display:none}
+  .aside-hint.show{display:block}
+  .aside-hint code{color:var(--clay)}
+  /* A line the reader is meant to see and then discard. */
+  .strike{text-decoration:line-through;text-decoration-color:var(--carnelian);text-decoration-thickness:1.5px;color:var(--faint)}
+
+  /* ===== Quiz ===== */
+  .quiz{max-width:860px}
+  .quiz-question{font-size:18px;line-height:1.6;margin:0 0 6px 0;color:var(--ink)}
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .opts label{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:2px;background:var(--bitumen-2);border:1px solid var(--line);cursor:pointer;font-size:15px;line-height:1.55;color:var(--ink);transition:border-color .16s,background .16s}
+  .opts label:hover{border-color:var(--clay-mid)}
+  .opts input{margin-top:4px;accent-color:var(--gold);flex-shrink:0}
+  .quiz.answered .opts label{cursor:default}
+  .opts label.is-correct{border-color:var(--reed);background:var(--reed-wash)}
+  .opts label.is-wrong{border-color:var(--carnelian);background:var(--carnelian-wash)}
+  .quiz-explain{display:none;margin-top:20px;padding-left:22px;border-left:2px solid var(--lapis)}
+  .quiz-explain.show{display:block}
+  .quiz-explain .verdict{font-family:var(--data);font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--lapis);margin-bottom:10px}
+  .quiz-explain.hint{border-left-color:var(--carnelian)}
+  .quiz-explain.hint .verdict{color:var(--carnelian)}
+  .quiz-explain p{margin:0;color:var(--ink);font-size:15px;line-height:1.7}
+
+  /* ===== Gate ===== */
+  .locked{display:none !important}
+  .gate{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;scroll-snap-align:start;gap:16px}
+  .gate .wedge{width:14px;height:16px;opacity:0.8}
+  .gate-msg{font-family:var(--data);font-size:10.5px;letter-spacing:0.3em;text-transform:uppercase;color:var(--carnelian)}
+  .gate-title{font-family:var(--display);font-weight:400;font-size:clamp(24px,3vw,36px);margin:0;color:var(--ink)}
+  .gate-sub{color:var(--ink-dim);font-size:15.5px;line-height:1.7;max-width:52ch;margin:0}
+
+  /* ===== Closing ===== */
+  .parts{list-style:none;padding:0;margin:34px 0 0 0;max-width:820px}
+  .parts li{display:grid;grid-template-columns:190px 1fr;gap:24px;padding:16px 0;border-top:1px solid var(--line-soft);font-size:15.5px;line-height:1.6;color:var(--ink-dim)}
+  .parts li:last-child{border-bottom:1px solid var(--line-soft)}
+  .parts .part-name{font-family:var(--data);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);padding-top:3px}
+  @media (max-width:640px){.parts li{grid-template-columns:1fr;gap:6px}}
+
+/* ===== cx additions ===== */
+/* Debrief tiles and the gap chart. */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 22px 0}
+@media (max-width:980px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.tiles{grid-template-columns:1fr}}
+.tile{background:var(--bitumen-2);border:1px solid var(--line);border-radius:3px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.tile .tk{font-family:var(--data);font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-dim)}
+.tile .tv{font-family:var(--data);font-size:27px;line-height:1.05;color:var(--clay);word-break:break-word}
+.tile .tv.small{font-size:15px;line-height:1.4}
+.tile .ts{font-size:12.5px;line-height:1.55;color:var(--faint)}
+.tile.ok .tv{color:var(--reed)}
+.tile.warn .tv{color:var(--carnelian)}
+.tile.mid .tv{color:var(--lapis)}
+.chart-card{background:var(--bitumen-2);border:1px solid var(--line);border-radius:3px;padding:18px 20px 10px}
+.chart-card canvas{width:100%;height:220px;display:block}
+.dim{fill:none;stroke:currentColor;stroke-width:1}
+#p1_dw{color:var(--clay)} #p1_dh{color:var(--lapis)}
+.dimlab{font-family:var(--data);font-size:11px;letter-spacing:0.02em}
+/* Rendered text never hyphenates and never breaks a word across lines. */
+html,body{hyphens:none;-webkit-hyphens:none}
+
+.lead{color:var(--ink-dim);font-size:17px;line-height:1.7;margin:0 0 26px 0;max-width:60ch}
+.lead strong{color:var(--ink)}
+.eq{font-family:var(--data);font-size:clamp(18px,2.2vw,26px);color:var(--gold);letter-spacing:0.04em;margin:0}
+.eq .v{color:var(--clay)}
+.eq .t{color:var(--lapis)}
+
+.brace-fig svg{width:100%;max-width:560px;height:auto;display:block}
+.brace-fig .fx{font-family:var(--data);font-size:30px;fill:var(--ink)}
+.brace-fig .fx.a{fill:var(--reed)}
+.brace-fig .fx.l{fill:var(--lapis)}
+.brace-fig .br{fill:none;stroke:var(--faint);stroke-width:1.6}
+.brace-fig .cap{font-family:var(--data);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;fill:var(--faint)}
+
+/* Problem two: a square of your guess, dropped on a hole of the true side. */
+.drop-stage{position:relative;width:100%;height:340px;background:var(--bitumen-2);
+            border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.hole{position:absolute;z-index:2;border:2px dashed var(--lapis);border-radius:2px;
+      display:flex;align-items:center;justify-content:center;
+      background:repeating-linear-gradient(135deg,var(--line-soft) 0 6px,transparent 6px 12px)}
+.hole .tag{font-family:var(--data);font-size:12px;color:var(--lapis)}
+.hole.filled{border-style:solid;border-color:var(--reed);background:var(--reed-wash)}
+.hole.filled .tag{color:var(--reed)}
+.falling{position:absolute;z-index:3;border:2px solid var(--clay);border-radius:2px;
+         background:var(--clay-wash);display:flex;align-items:center;justify-content:center;
+         font-family:var(--data);font-size:13px;color:var(--clay)}
+.falling.big{border-color:var(--carnelian);color:var(--carnelian);background:var(--carnelian-wash)}
+.falling.small{border-color:var(--lapis);color:var(--lapis);background:var(--clay-wash)}
+.falling.fits{border-color:var(--reed);color:var(--reed);background:var(--reed-wash)}
+@media (prefers-reduced-motion: reduce){.falling{transition:none !important}}
+
+.verdict-big{color:var(--carnelian)}
+.verdict-small{color:var(--lapis)}
+.verdict-fits{color:var(--reed)}
+</style>
+</head>
+<body>
+<main>
+
+<!-- 1 =========================================================== TITLE -->
+<section class="page">
+  <div class="hero">
+    <div class="hero-inner" style="grid-template-columns:1fr">
+      <div>
+        <h1 class="hero-title reveal">Two problems,<br>done by hand.</h1>
+        <p class="lead reveal d1" style="margin-top:26px">The update rule you have just seen:</p>
+        <div class="brace-fig reveal d2">
+          <svg id="rule_fig" viewBox="0 0 560 150" role="img"
+               aria-label="w becomes w plus alpha times l, where alpha is the step size and l is the loss"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ================================================== PROBLEM ONE -->
+<section class="page segment slide-scroll" id="p1">
+  <div class="segment-inner" style="padding:88px 0 48px">
+    <div class="rule reveal"><span class="wedge"></span><span class="rule-label">Problem one</span></div>
+    <h2 class="segment-heading reveal d1">Solve <span style="font-family:var(--data);color:var(--gold)">w = 1 + 1/w</span></h2>
+    <p class="lead reveal d2">Move every <code>w</code> to one side:</p>
+    <p class="eq reveal d2"><span class="v">f(w)</span> = w &minus; 1/w,&nbsp;&nbsp; target = <span class="t">1</span>,&nbsp;&nbsp; l = <span class="t">1</span> &minus; <span class="v">f(w)</span></p>
+    <p class="lead reveal d2" style="margin:14px 0 26px 0">Type any positive <code>w</code> and press <strong>Step</strong>. Each step reads <code>f(w)</code>, takes the loss, and moves <code>w</code> by <code>&alpha;&middot;l</code> with <code>&alpha; = 1</code>. The new <code>w</code> lands back in the box, so you can keep pressing. Stop when <code>|l| &lt; 0.001</code>.</p>
+
+    <div class="stage reveal d3" id="p1_stage">
+      <div class="control">
+        <div class="field">
+          <label for="p1_w">w</label>
+          <input id="p1_w" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="1" />
+        </div>
+        <button class="press" id="p1_go">Step</button>
+        <button class="press quiet" id="p1_reset">Reset</button>
+        <div class="readout">
+          <div><p class="k">Steps</p><p class="v" id="p1_n">0</p></div>
+          <div><p class="k">l</p><p class="v small" id="p1_l">&middot;</p></div>
+        </div>
+
+        <div class="fig" style="margin-top:4px">
+          <svg id="p1_fig" viewBox="0 0 300 268" role="img"
+               aria-label="A rectangle with sides w across and 1 + 1/w up. The two sides differ by l.">
+            <rect id="p1_gap" x="0" y="0" width="0" height="0" stroke="none"/>
+            <rect id="p1_sq" x="0" y="0" width="0" height="0" class="sq-target" vector-effect="non-scaling-stroke"/>
+            <rect id="p1_rect" x="0" y="0" width="0" height="0" class="sq-guess" vector-effect="non-scaling-stroke"/>
+            <path id="p1_dw" class="dim" d=""/>
+            <path id="p1_dh" class="dim" d=""/>
+            <path id="p1_dl" class="dim" d=""/>
+            <text id="p1_lw" class="dimlab" text-anchor="middle" fill="var(--clay)"></text>
+            <text id="p1_lh" class="dimlab" text-anchor="middle" fill="var(--lapis)"></text>
+            <text id="p1_ll" class="dimlab" text-anchor="start"></text>
+          </svg>
+          <p class="fig-caption">The equation asks for these two sides to match</p>
+        </div>
+      </div>
+
+      <div class="stage-right">
+        <div class="cols tall" style="max-height:380px">
+          <table class="ruled run">
+            <thead><tr><th>w</th><th>f(w)</th><th>l = 1 &minus; f(w)</th><th>Update</th></tr></thead>
+            <tbody id="p1_rows"><tr><td class="empty" colspan="4">Enter a positive w.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="endcard" id="p1_end" role="dialog" aria-modal="true" hidden>
+        <span class="wedge"></span>
+        <h3 class="end-title">Solved.</h3>
+        <p class="end-row">w = <b id="p1_endw">1.6180</b> after <b id="p1_endn">9</b> steps.</p>
+        <div class="end-actions">
+          <button class="press quiet" id="p1_again">Again</button>
+          <button class="press" id="p1_next">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 =============================================== PROBLEM ONE, CODE -->
+<section class="page segment slide-scroll" id="p1code">
+  <div class="segment-inner" style="padding:88px 0 48px">
+    <div class="rule reveal"><span class="wedge"></span><span class="rule-label">Your turn to write it</span></div>
+
+    <pre class="tablet-code reveal d1"><span class="kw">def</span> <span class="fn">solve</span>(alpha=<span class="num">1.0</span>, tol=<span class="num">1e-10</span>, max_steps=<span class="num">10_000</span>):
+    w = <span class="num">1.0</span>
+    l = <span class="num">1.0</span>
+    steps = <span class="num">0</span>
+
+    <span class="kw">while</span> <input class="inline" data-a="4" placeholder="... &gt; tol" style="min-width:190px" /> <span class="kw">and</span> steps &lt; max_steps:
+        f = <input class="inline" data-a="1" placeholder="w - ..." style="min-width:190px" />
+        l = <input class="inline" data-a="2" placeholder="1 - ..." style="min-width:190px" />
+        w = <input class="inline" data-a="3" placeholder="w + ..." style="min-width:190px" />
+        steps += <span class="num">1</span>
+
+    <span class="kw">return</span> w, steps</pre>
+
+    <div class="btnrow reveal d2">
+      <button class="press" id="a_check">Check</button>
+      <button class="hint-link" id="a_hint">stuck?</button>
+    </div>
+    <div class="msg" id="a_fb"></div>
+    <div class="aside-hint" id="a_hintbox">
+      The columns of the table you just filled in are the lines of this loop, in the same order. It keeps going while the loss is still too big to ignore, whichever side of zero it sits on.
+    </div>
+  </div>
+</section>
+
+<!-- 4 ============================================================ ALPHA -->
+<section class="page">
+  <div class="segment">
+    <div class="segment-inner">
+      <div class="rule reveal"><span class="wedge"></span><span class="rule-label">The step size</span></div>
+      <h2 class="segment-heading reveal d1">Here <span style="font-family:var(--data);color:var(--reed)">&alpha; = 1</span> is enough.</h2>
+      <p class="eq reveal d2" style="margin-bottom:18px">w := w + <span class="t">&alpha;</span> &middot; l</p>
+      <p class="eq reveal d2" style="margin-bottom:22px">w + <span class="t">1</span>&nbsp;&middot;&nbsp;(1 &minus; f(w)) = 1 + 1/w</p>
+      <p class="lead reveal d2">A full step lands on the target, and the target pulls you in. Nine steps from w = 1.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ================================================== PROBLEM TWO -->
+<section class="page segment slide-scroll" id="p2">
+  <div class="segment-inner" style="padding:88px 0 48px">
+    <div class="rule reveal"><span class="wedge"></span><span class="rule-label">Problem two</span></div>
+    <h2 class="segment-heading reveal d1">Find <span style="font-family:var(--data);color:var(--gold)">&radic;<span id="p2_area_h">2026</span></span></h2>
+    <p class="eq reveal d2"><span class="v">f(w)</span> = w&sup2;,&nbsp;&nbsp; target = <span class="t" id="p2_area_e">2026</span>,&nbsp;&nbsp; l = <span class="t" id="p2_area_e2">2026</span> &minus; <span class="v">f(w)</span></p>
+    <p class="lead reveal d2" style="margin:14px 0 22px 0">Behind the dashed outline sits a square of the area above. You cannot measure it, you can only try a side and see what happens.</p>
+    <div class="note reveal d2" style="margin-bottom:26px">
+      <span class="note-tag">What the drop tells you</span>
+      <p style="margin:0"><strong style="color:var(--carnelian)">Too big</strong> and the square will not go in, so it rests on the rim.<br>
+         <strong style="color:var(--lapis)">Too small</strong> and it falls straight through.<br>
+         <strong style="color:var(--reed)">Right</strong> and it seats in the hole.</p>
+      <p class="aside" style="margin-top:12px">That is the whole signal: which side of the answer you are on, and by how much. Read <code>l</code>, then say which way <code>w</code> has to move before you try again.</p>
+    </div>
+
+    <div class="stage reveal d3">
+      <div class="control">
+        <div class="field">
+          <label for="p2_w">w</label>
+          <input id="p2_w" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="20" />
+        </div>
+        <button class="press" id="p2_go">Drop it</button>
+        <button class="press quiet" id="p2_reset">New square</button>
+        <div class="readout">
+          <div><p class="k">Tries</p><p class="v" id="p2_n">0</p></div>
+          <div><p class="k">l</p><p class="v small" id="p2_l">&middot;</p></div>
+        </div>
+        <div class="voice" id="p2_voice">Drop a square and see if it fits.</div>
+      </div>
+
+      <div class="stage-right">
+        <div class="drop-stage" id="p2_drop">
+          <div class="hole" id="p2_hole"><span class="tag">2026</span></div>
+        </div>
+        <div class="cols tall" style="max-height:230px;margin-top:20px">
+          <table class="ruled run">
+            <thead><tr><th>w</th><th>f(w)</th><th>l = <span id="p2_area_t">2026</span> &minus; f(w)</th><th>Update</th></tr></thead>
+            <tbody id="p2_rows"><tr><td class="empty" colspan="4">Enter a positive w.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ===================================================== BETTER ALPHA -->
+<section class="page segment slide-scroll" id="p2alpha">
+  <div class="segment-inner" style="padding:88px 0 48px">
+    <div class="rule reveal"><span class="wedge"></span><span class="rule-label">The step size</span></div>
+    <h2 class="segment-heading reveal d1">What &alpha; were you using?</h2>
+    <p class="eq reveal d2">w := w + <span class="t">&alpha;</span> &middot; l</p>
+    <p class="lead reveal d2" style="margin:14px 0 26px 0">You were not picking numbers at random. Every drop was one step of the same rule, whether you meant it that way or not: you read a loss, and you moved <code>w</code> by some amount. Divide the move by the loss that caused it and the step size you were using falls out.</p>
+
+<div class="tiles reveal d2" id="ia_tiles"></div>
+
+<div class="chart-card reveal d2" style="margin-bottom:30px">
+  <p class="rule-label" style="margin:0 0 10px 0">Gap to the answer by attempt, log scale</p>
+  <canvas id="ia_chart" height="220"></canvas>
+</div>
+  </div>
+</section>
+
+<!-- 7 =============================================== PROBLEM TWO, CODE -->
+<section class="page segment slide-scroll" id="p2code">
+  <div class="segment-inner" style="padding:88px 0 48px">
+    <div class="rule reveal"><span class="wedge"></span><span class="rule-label">Your turn to write it</span></div>
+    <h2 class="segment-heading reveal d1">The same rule, in code.</h2>
+    <p class="eq reveal d1" style="margin-bottom:22px">w := w + <span class="t">&alpha;</span> &middot; ( area &minus; w&sup2; )</p>
+    <p class="lead reveal d2" style="margin-bottom:30px">Nothing new. The loss is <code>area &minus; w&sup2;</code>, and <code>&alpha;</code> is fixed at <code>0.01</code>. The print shows <code>w</code> and <code>l</code> after every step, so you can watch the loss fall.</p>
+
+    <pre class="tablet-code reveal d2"><span class="kw">def</span> <span class="fn">root</span>(area, alpha=<span class="num">0.01</span>, tol=<span class="num">1e-3</span>, max_steps=<span class="num">200</span>):
+    w = <span class="num">1.0</span>
+    l = <span class="num">1.0</span>
+    steps = <span class="num">0</span>
+
+    <span class="kw">while</span> <input class="inline" data-b="3" placeholder="... &gt; tol" style="min-width:210px" /> <span class="kw">and</span> steps &lt; max_steps:
+        l = <input class="inline" data-b="1" placeholder="area - ..." style="min-width:210px" />
+        w = <input class="inline" data-b="2" placeholder="w + ..." style="min-width:210px" />
+        steps += <span class="num">1</span>
+        <span class="fn">print</span>(<span class="str">f"step {steps}: w = {w:.4f}  l = {l:.4f}"</span>)
+
+    <span class="kw">return</span> w, steps</pre>
+
+    <div class="btnrow reveal d3">
+      <button class="press" id="b_check">Check</button>
+      <button class="hint-link" id="b_hint">stuck?</button>
+    </div>
+    <div class="msg" id="b_fb"></div>
+    <div id="b_out" hidden>
+      <span class="out-tag">What it prints</span>
+      <pre class="out" id="b_outpre"></pre>
+    </div>
+
+    <div class="aside-hint" id="b_hintbox">
+      Like problem one, without the f line. The loss compares the area you want with the area your w actually makes.
+    </div>
+  </div>
+</section>
+
+
+
+
+</main>
+<script>
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('load', () => window.scrollTo(0, 0));
+
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) { el.classList.add('in'); io.unobserve(el); }
+    });
+  });
+
+  const norm = s => (s || '').replace(/\s+/g, '').replace(/"/g, "'");
+  const fmt = (x, d) => Number(x).toFixed(d).replace('-', '−');
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  function signed(x, d){ return (x >= 0 ? '+' : '−') + Math.abs(x).toFixed(d); }
+  function setState(el, ok){ el.classList.remove('ok', 'bad'); el.classList.add(ok ? 'ok' : 'bad'); }
+  function say(el, kind, text){ el.className = 'msg ' + kind; el.textContent = text; }
+  function mute(el){ el.className = 'msg'; el.textContent = ''; }
+  function num(raw){ const v = parseFloat((raw || '').trim()); return (isFinite(v) && v > 0) ? v : null; }
+  function bindHint(btn, box){
+    document.getElementById(btn).addEventListener('click', function(){
+      const on = document.getElementById(box).classList.toggle('show');
+      this.textContent = on ? 'hide' : 'stuck?';
+    });
+  }
+
+  // ===== the title figure: w := w + alpha . l, with both parts braced =====
+  (function(){
+    const svg = document.getElementById('rule_fig');
+    if (!svg) return;
+    // A curly brace spanning [x, x + w]. dir = 1 hangs below the line, dir = -1
+    // sits above it. Only the vertical component flips: negating the horizontal
+    // one too would mirror the brace and draw it backwards.
+    function brace(x, w, y, dir = 1){
+      const d = 7, v = d * dir, m = x + w / 2;
+      return 'M ' + x + ' ' + y
+           + ' q 0 ' + v + ' ' + d + ' ' + v
+           + ' L ' + (m - d) + ' ' + (y + v)
+           + ' q ' + d + ' 0 ' + d + ' ' + v
+           + ' q 0 ' + (-v) + ' ' + d + ' ' + (-v)
+           + ' L ' + (x + w - d) + ' ' + (y + v)
+           + ' q ' + d + ' 0 ' + d + ' ' + (-v);
+    }
+    svg.innerHTML =
+        '<text class="fx" x="30" y="86">w := w +</text>'
+      + '<text class="fx a" x="238" y="86">α</text>'
+      + '<text class="fx" x="286" y="86">·</text>'
+      + '<text class="fx l" x="330" y="86">l</text>'
+      
+      // underbrace
+      + '<path class="br" d="' + brace(230, 42, 98) + '"/>'
+      
+      // overbrace
+      + '<path class="br" d="' + brace(322, 26, 52)
+      + '" transform="translate(0 104) scale(1 -1)"/>'
+      
+      + '<text class="cap" x="251" y="130" text-anchor="middle">step size</text>'
+      + '<text class="cap" x="335" y="30" text-anchor="middle">loss</text>';
+    })();
+
+  // ===== problem one: w = 1 + 1/w, so f(w) = w - 1/w and target 1 =====
+  (function(){
+    const TOL = 1e-3;
+    const wIn = document.getElementById('p1_w');
+    const rows = document.getElementById('p1_rows');
+    const stage = document.getElementById('p1_stage');
+    const end = document.getElementById('p1_end');
+    let hist = [], done = false;
+
+    const f = w => w - 1 / w;
+
+    // The equation says w and 1 + 1/w should be the same number, so draw them as
+    // the two sides of a rectangle: it becomes a square exactly when the equation
+    // holds. The strip left over is l, because (1 + 1/w) - w = 1 - (w - 1/w) = l.
+    const fig = {
+      rect: document.getElementById('p1_rect'),
+      sq:   document.getElementById('p1_sq'),
+      gap:  document.getElementById('p1_gap'),
+      dw:   document.getElementById('p1_dw'),
+      dh:   document.getElementById('p1_dh'),
+      dl:   document.getElementById('p1_dl'),
+      lw:   document.getElementById('p1_lw'),
+      lh:   document.getElementById('p1_lh'),
+      ll:   document.getElementById('p1_ll'),
+    };
+    const OX = 74, OY = 214, SPAN = 168;
+
+    // a dimension line with a serif at each end
+    function dim(x1, y1, x2, y2, t){
+      const vert = x1 === x2;
+      const a = vert ? 'M ' + (x1 - t) + ' ' + y1 + ' H ' + (x1 + t) : 'M ' + x1 + ' ' + (y1 - t) + ' V ' + (y1 + t);
+      const b = vert ? 'M ' + (x2 - t) + ' ' + y2 + ' H ' + (x2 + t) : 'M ' + x2 + ' ' + (y2 - t) + ' V ' + (y2 + t);
+      return 'M ' + x1 + ' ' + y1 + ' L ' + x2 + ' ' + y2 + ' ' + a + ' ' + b;
+    }
+
+    function drawFig(){
+      const w = num(wIn.value);
+      if (w === null || !fig.rect) return;
+      const h = 1 + 1 / w;
+      const k = SPAN / Math.max(w, h, 2.2);          // keep both sides in frame
+      const wp = w * k, hp = h * k;
+
+      fig.rect.setAttribute('x', OX);
+      fig.rect.setAttribute('y', OY - hp);
+      fig.rect.setAttribute('width', wp);
+      fig.rect.setAttribute('height', hp);
+
+      fig.sq.setAttribute('x', OX);
+      fig.sq.setAttribute('y', OY - wp);
+      fig.sq.setAttribute('width', wp);
+      fig.sq.setAttribute('height', wp);
+
+      const top = Math.min(OY - hp, OY - wp);
+      const band = Math.abs(hp - wp);
+      fig.gap.setAttribute('x', OX);
+      fig.gap.setAttribute('y', top);
+      fig.gap.setAttribute('width', wp);
+      fig.gap.setAttribute('height', band);
+      fig.gap.setAttribute('fill', h > w ? 'var(--carnelian-wash)' : 'var(--clay-wash)');
+
+      // w measured along the bottom
+      fig.dw.setAttribute('d', dim(OX, OY + 14, OX + wp, OY + 14, 4));
+      fig.lw.setAttribute('x', OX + wp / 2);
+      fig.lw.setAttribute('y', OY + 34);
+      fig.lw.textContent = 'w = ' + fmt(w, 4);
+
+      // 1 + 1/w measured up the left, the label turned to run with it
+      fig.dh.setAttribute('d', dim(OX - 16, OY, OX - 16, OY - hp, 4));
+      fig.lh.setAttribute('x', OX - 26);
+      fig.lh.setAttribute('y', OY - hp / 2);
+      fig.lh.setAttribute('transform', 'rotate(-90 ' + (OX - 26) + ' ' + (OY - hp / 2) + ')');
+      fig.lh.textContent = '1 + 1/w = ' + fmt(h, 4);
+
+      // l is the strip between the two, marked on the right
+      const l = h - w, show = band >= 2;
+      fig.dl.setAttribute('d', show ? dim(OX + wp + 12, top, OX + wp + 12, top + band, 4) : '');
+      fig.dl.setAttribute('style', 'color:' + (l > 0 ? 'var(--carnelian)' : 'var(--lapis)'));
+      fig.ll.setAttribute('x', OX + wp + 20);
+      fig.ll.setAttribute('y', top + band / 2 + 4);
+      fig.ll.setAttribute('text-anchor', 'start');
+      fig.ll.setAttribute('fill', l > 0 ? 'var(--carnelian)' : 'var(--lapis)');
+      fig.ll.textContent = show ? ('l = ' + signed(l, 4)) : '';
+    }
+
+
+    function render(){
+      rows.innerHTML = hist.length === 0
+        ? '<tr><td class="empty" colspan="4">Enter a positive w.</td></tr>'
+        : hist.map(r => '<tr>'
+            + '<td>' + fmt(r.w, 6) + '</td>'
+            + '<td>' + fmt(r.f, 6) + '</td>'
+            + '<td class="' + (r.l < 0 ? 'neg' : 'pos') + '">' + signed(r.l, 6) + '</td>'
+            + '<td class="q" style="font-size:17px">' + (r.l > 0 ? '&uarr;' : '&darr;') + '</td>'
+            + '</tr>').join('');
+      const wrap = rows.closest('.cols');
+      wrap.scrollTop = wrap.scrollHeight;
+      document.getElementById('p1_n').textContent = hist.length;
+      document.getElementById('p1_l').textContent = hist.length ? signed(hist[hist.length - 1].l, 6) : '·';
+      drawFig();
+    }
+
+    function step(){
+      if (done) return;
+      const w = num(wIn.value);
+      if (w === null) { wIn.focus(); return; }
+      const fv = f(w), l = 1 - fv, next = w + l;      // alpha = 1
+      hist.push({ w, f: fv, l, next });
+      render();
+      if (Math.abs(l) < TOL) {
+        done = true;
+        document.getElementById('p1_endw').textContent = fmt(w, 6);
+        document.getElementById('p1_endn').textContent = hist.length;
+        end.hidden = false; stage.classList.add('done');
+        document.getElementById('p1_go').disabled = true;
+        return;
+      }
+      wIn.value = fmt(next, 10);
+    }
+
+    function reset(){
+      hist = []; done = false; wIn.value = '1';
+      document.getElementById('p1_go').disabled = false;
+      end.hidden = true; stage.classList.remove('done');
+      render();
+    }
+
+    document.getElementById('p1_go').addEventListener('click', step);
+    document.getElementById('p1_reset').addEventListener('click', reset);
+    document.getElementById('p1_again').addEventListener('click', reset);
+    document.getElementById('p1_next').addEventListener('click', () => {
+      const t = document.getElementById('p1code');
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    wIn.addEventListener('input', drawFig);
+    wIn.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); step(); } });
+    render();
+  })();
+
+  // ===== problem one, the code =====
+  (function(){
+    const ANS = {
+      1: ['w-1/w', 'w-1.0/w', 'w-(1/w)', '(w*w-1)/w'],
+      2: ['1-f', '1.0-f', '1-(f)'],
+      3: ['w+alpha*l', 'w+l*alpha', 'w+(alpha*l)'],
+      4: ['abs(l)>tol', 'abs(l)>=tol', 'tol<abs(l)'],
+    };
+    const fb = document.getElementById('a_fb');
+    document.getElementById('a_check').addEventListener('click', () => {
+      let bad = [];
+      for (const k of Object.keys(ANS)) {
+        const el = document.querySelector('input[data-a="' + k + '"]');
+        const ok = ANS[k].some(a => norm(a) === norm(el.value));
+        setState(el, ok);
+        if (!ok) bad.push(k);
+      }
+      if (bad.length === 0) { say(fb, 'ok', 'Correct.'); return; }
+      const el4 = document.querySelector('input[data-a="4"]');
+      if (bad.includes('4') && /^l>tol$|^l>=tol$/.test(norm(el4.value))) {
+        say(fb, 'bad', 'l goes negative on the way in, so that ends the loop early. Use its size.');
+        return;
+      }
+      say(fb, 'bad', bad.length + ' of 4 still open.');
+    });
+    bindHint('a_hint', 'a_hintbox');
+  })();
+
+// ===== problem two: drop a square of side w onto a hole of side sqrt(area) =====
+// The area is drawn fresh each round, so the answer cannot be memorised.
+const P2 = { area: 0, hist: [] };
+
+(function(){
+  const TOL = 0.02;
+  const wIn = document.getElementById('p2_w');
+  const rows = document.getElementById('p2_rows');
+  const drop = document.getElementById('p2_drop');
+  const hole = document.getElementById('p2_hole');
+  const voice = document.getElementById('p2_voice');
+  const goBtn = document.getElementById('p2_go');
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let busy = false, solved = false;
+
+  const root = () => Math.sqrt(P2.area);
+
+  function metrics(){
+    const w = drop.clientWidth, h = drop.clientHeight;
+    return { w, h, base: Math.min(w, h) * 0.42, ground: h * 0.42 };
+  }
+  function px(side, m){
+    return clamp(m.base * (side / root()), m.base * 0.1, Math.min(m.w, m.h) * 0.94);
+  }
+  function placeHole(){
+    const m = metrics();
+    // a container with no layout yet would collapse the hole to nothing
+    if (m.base < 4) return;
+    hole.style.width = m.base + 'px';
+    hole.style.height = m.base + 'px';
+    hole.style.left = 'calc(50% - ' + (m.base / 2) + 'px)';
+    hole.style.top = m.ground + 'px';
+  }
+
+  // the newest row waits for a direction before another drop is allowed
+  function pending(){
+    const last = P2.hist[P2.hist.length - 1];
+    return (last && !last.dir && !last.fits) ? last : null;
+  }
+  function rightDir(l){ return l > 0 ? 'up' : 'down'; }
+
+  function render(){
+    if (P2.hist.length === 0) {
+      rows.innerHTML = '<tr><td class="empty" colspan="4">Enter a positive w.</td></tr>';
+    } else {
+      const open = pending();
+      rows.innerHTML = P2.hist.map(r => {
+        const cell = r.fits
+          ? '<td class="hit">fits</td>'
+          : (r === open
+              ? '<td class="choose">'
+                + '<button class="corr pulse" data-dir="up" aria-label="lengthen w">lengthen</button>'
+                + '<button class="corr pulse" data-dir="down" aria-label="shorten w">shorten</button>'
+                + '</td>'
+              : '<td class="q" style="font-size:17px">' + (r.dir === 'up' ? '&uarr;' : '&darr;') + '</td>');
+        return '<tr>'
+          + '<td>' + fmt(r.w, 4) + '</td>'
+          + '<td>' + fmt(r.f, 4) + '</td>'
+          + '<td class="' + (r.l < 0 ? 'neg' : 'pos') + '">' + signed(r.l, 4) + '</td>'
+          + cell + '</tr>';
+      }).join('');
+      const wrap = rows.closest('.cols');
+      wrap.scrollTop = wrap.scrollHeight;
+    }
+    document.getElementById('p2_n').textContent = P2.hist.length;
+    document.getElementById('p2_l').textContent = P2.hist.length ? signed(P2.hist[P2.hist.length - 1].l, 2) : '·';
+    lock();
+  }
+
+  function lock(){
+    const open = pending();
+    wIn.disabled = goBtn.disabled = !!open || solved || busy;
+  }
+
+  rows.addEventListener('click', ev => {
+    const btn = ev.target.closest('.corr');
+    if (!btn) return;
+    const open = pending();
+    if (!open) return;
+    if (btn.dataset.dir !== rightDir(open.l)) {
+      btn.classList.remove('wrong'); void btn.offsetWidth; btn.classList.add('wrong');
+      voice.innerHTML = open.l > 0
+        ? 'l is positive, so w&sup2; is under the target. Shortening w makes it worse.'
+        : 'l is negative, so w&sup2; is over the target. Lengthening w makes it worse.';
+      return;
+    }
+    open.dir = btn.dataset.dir;
+    voice.textContent = open.dir === 'up' ? 'Lengthen w and drop again.' : 'Shorten w and drop again.';
+    render();
+    wIn.focus(); wIn.select();
+  });
+
+  function go(){
+    if (busy || solved || pending()) return;
+    const w = num(wIn.value);
+    if (w === null) { wIn.focus(); return; }
+    busy = true; lock(); placeHole();
+
+    const fv = w * w, l = P2.area - fv;
+    const fits = Math.abs(w - root()) <= TOL;
+    const kind = fits ? 'fits' : (w > root() ? 'big' : 'small');
+    P2.hist.push({ w, f: fv, l, fits, dir: null });
+    render();
+
+    const m = metrics(), size = px(w, m);
+    const sq = document.createElement('div');
+    sq.className = 'falling ' + kind;
+    sq.style.width = size + 'px';
+    sq.style.height = size + 'px';
+    sq.style.left = 'calc(50% - ' + (size / 2) + 'px)';
+    sq.style.top = (-size - 20) + 'px';
+    sq.textContent = fmt(w, 2);
+    drop.appendChild(sq);
+
+    const land = kind === 'big' ? m.ground - size
+               : kind === 'fits' ? m.ground
+               : m.ground + m.base;
+    const ms = REDUCED.matches ? 60 : 700;
+
+    requestAnimationFrame(() => {
+      sq.style.transition = 'top ' + ms + 'ms cubic-bezier(0.6,0,1,0.4)';
+      requestAnimationFrame(() => { sq.style.top = land + 'px'; });
+    });
+
+    setTimeout(() => {
+      if (kind === 'fits') {
+        solved = true;
+        // The seated square and the hole are concentric and both translucent, so
+        // their labels would print over one another. Show the square landing, then
+        // dissolve it and let the filled hole carry the number.
+        sq.textContent = '';
+        setTimeout(() => {
+          hole.classList.add('filled');
+          hole.querySelector('.tag').textContent = fmt(root(), 4);
+          sq.style.transition = 'opacity 260ms ease';
+          sq.style.opacity = '0';
+          setTimeout(() => { if (sq.isConnected) sq.remove(); }, 300);
+        }, 220);
+        voice.innerHTML = 'It fits. <b>w = ' + fmt(w, 4) + '</b> in ' + P2.hist.length
+                        + (P2.hist.length === 1 ? ' try.' : ' tries.');
+      } else if (kind === 'big') {
+        voice.innerHTML = 'Too big, it sits on the rim. Which way now?';
+        setTimeout(() => sq.remove(), 700);
+      } else {
+        voice.innerHTML = 'Too small, it falls through. Which way now?';
+        sq.style.opacity = '0';
+        setTimeout(() => sq.remove(), 320);
+      }
+      busy = false;
+      render();
+      if (typeof window.renderImplied === 'function') window.renderImplied();
+    }, ms + 60);
+  }
+
+  function reset(){
+    P2.area = 1900 + Math.floor(Math.random() * 201);   // 1900 to 2100 inclusive
+    P2.hist = []; busy = false; solved = false;
+    ['p2_area_h', 'p2_area_e', 'p2_area_e2', 'p2_area_t'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.textContent = P2.area;
+    });
+    wIn.value = '20'; wIn.disabled = false;
+    hole.classList.remove('filled');
+    hole.querySelector('.tag').textContent = P2.area;
+    drop.querySelectorAll('.falling').forEach(e => e.remove());
+    voice.textContent = 'Drop a square and see if it fits.';
+    render(); placeHole();
+    if (typeof window.renderImplied === 'function') window.renderImplied();
+  }
+
+  goBtn.addEventListener('click', go);
+  document.getElementById('p2_reset').addEventListener('click', reset);
+  wIn.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+  window.addEventListener('resize', placeHole);
+  if (window.ResizeObserver) new ResizeObserver(placeHole).observe(drop);
+  reset();
+})();
+
+  // ===== the step size, read back out of the guesses just made =====
+  (function(){
+    const rows = document.getElementById('ia_rows');
+    const tiles = document.getElementById('ia_tiles');
+    const canvas = document.getElementById('ia_chart');
+    if (!tiles && !canvas) return;
+
+    const root = () => Math.sqrt(P2.area);
+    const f4 = x => fmt(x, 4);
+
+    // What the average step size says about the way the guessing went.
+    function verdict(avg, n, solved){
+      const ideal = 1 / (2 * root());
+      if (n <= 1) return solved
+        ? { label: 'Right first time', tone: 'ok', note: 'One guess, so there is no step to measure yet.' }
+        : { label: 'One guess so far', tone: '', note: 'Drop another square so there is a step to read.' };
+      if (avg === null || !isFinite(avg))
+        return { label: 'Inconclusive', tone: '', note: 'The guesses did not move enough to read a step size.' };
+      const r = avg / ideal;
+      const A = f4(avg), I = f4(ideal);
+      if (r <= 0)    return { label: 'Erratic', tone: 'warn', note: 'Average &alpha; is ' + A + '. The steps went against the sign of l, so they were not following the feedback.' };
+      if (r >= 2)    return { label: 'Diverging', tone: 'warn', note: 'Average &alpha; is ' + A + ', more than twice the best value (' + I + '), so each round overshoots harder.' };
+      if (r > 1.15)  return { label: 'Oscillating, but closing in', tone: 'mid', note: 'Average &alpha; is ' + A + ', above the best value (' + I + '), so w keeps crossing the answer while the gap shrinks.' };
+      if (r >= 0.85) return { label: 'Close to the best step', tone: 'ok', note: 'Average &alpha; is ' + A + ', near the best value (' + I + '). Each guess removes most of what is left.' };
+      if (r >= 0.3)  return { label: 'Steady, if slow', tone: '', note: 'Average &alpha; is ' + A + ', a fraction of the best value (' + I + '). Reliable, but slower than it needs to be.' };
+      return { label: 'Very cautious', tone: '', note: 'Average &alpha; is ' + A + ', far below the best value (' + I + '), so w creeps toward the answer.' };
+    }
+
+    function drawChart(){
+      if (!canvas) return;
+      const h = P2.hist;
+      const cssW = canvas.clientWidth, cssH = 220;
+      if (!cssW) return;                       // not laid out yet
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = cssW * dpr; canvas.height = cssH * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, cssW, cssH);
+      if (h.length === 0) return;
+
+      const cs = getComputedStyle(document.documentElement);
+      const tok = n => cs.getPropertyValue(n).trim();
+      const ink = tok('--ink'), dim = tok('--ink-dim'), line = tok('--line');
+      const ok = tok('--reed'), big = tok('--carnelian'), small = tok('--lapis');
+
+      const mL = 52, mR = 14, mT = 10, mB = 26;
+      const pW = cssW - mL - mR, pH = cssH - mT - mB;
+
+      // a floor keeps an exact hit on the chart instead of at log of zero
+      const gaps = h.map(r => Math.max(Math.abs(r.w - root()), 5e-4));
+      const logs = gaps.map(Math.log10);
+      let hi = Math.ceil(Math.max.apply(null, logs.concat([1]))) + 0.3;
+      let lo = Math.floor(Math.min.apply(null, logs.concat([0]))) - 0.2;
+      if (hi - lo < 1) hi = lo + 1;
+
+      const xAt = i => mL + (h.length <= 1 ? pW / 2 : pW * i / (h.length - 1));
+      const yAt = v => mT + pH * (1 - (v - lo) / (hi - lo));
+
+      ctx.font = '11px ui-monospace, SFMono-Regular, Menlo, monospace';
+      ctx.strokeStyle = line; ctx.lineWidth = 1; ctx.fillStyle = dim;
+      for (let e = Math.ceil(lo); e <= Math.floor(hi); e++) {
+        const y = yAt(e);
+        ctx.beginPath(); ctx.moveTo(mL, y); ctx.lineTo(cssW - mR, y); ctx.stroke();
+        ctx.fillText(e === 0 ? '1' : (e === -1 ? '0.1' : '10^' + e), 4, y + 4);
+      }
+      ctx.strokeStyle = dim; ctx.beginPath();
+      ctx.moveTo(mL, mT); ctx.lineTo(mL, cssH - mB); ctx.lineTo(cssW - mR, cssH - mB); ctx.stroke();
+
+      const step = Math.max(1, Math.ceil(h.length / 8));
+      h.forEach((r, i) => {
+        if (i % step === 0 || i === h.length - 1) ctx.fillText(String(i + 1), xAt(i) - 3, cssH - mB + 16);
+      });
+
+      ctx.strokeStyle = ink; ctx.lineWidth = 1.5; ctx.beginPath();
+      logs.forEach((v, i) => { const x = xAt(i), y = yAt(v); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+      ctx.stroke();
+
+      h.forEach((r, i) => {
+        ctx.fillStyle = r.fits ? ok : (r.w > root() ? big : small);
+        ctx.beginPath(); ctx.arc(xAt(i), yAt(logs[i]), 4, 0, Math.PI * 2); ctx.fill();
+      });
+    }
+
+    window.renderImplied = function(){
+      const h = P2.hist;
+      const out = [];
+      for (let i = 1; i < h.length; i++) {
+        const wOld = h[i - 1].w, lOld = h[i - 1].l, wNew = h[i].w;
+        if (lOld === 0) continue;
+        out.push({ wOld, lOld, wNew, a: (wNew - wOld) / lOld, ref: 1 / (2 * root()) });
+      }
+
+      if (rows) rows.innerHTML = out.length === 0
+        ? '<tr><td class="empty" colspan="5">Make a few guesses in problem two first.</td></tr>'
+        : out.map(r => '<tr>'
+            + '<td>' + fmt(r.wOld, 3) + '</td>'
+            + '<td class="' + (r.lOld < 0 ? 'neg' : 'pos') + '">' + signed(r.lOld, 2) + '</td>'
+            + '<td>' + fmt(r.wNew, 3) + '</td>'
+            + '<td class="q">' + fmt(r.a, 5) + '</td>'
+            + '<td class="hit">' + fmt(r.ref, 5) + '</td>'
+            + '</tr>').join('');
+
+      if (tiles) {
+        const usable = out.map(r => r.a).filter(isFinite);
+        const avg = usable.length ? usable.reduce((s, v) => s + v, 0) / usable.length : null;
+        const solved = h.length > 0 && h[h.length - 1].fits;
+        const gap = h.length ? Math.abs(h[h.length - 1].w - root()) : null;
+        const v = verdict(avg, h.length, solved);
+        const tile = (k, val, sub, cls, sm) =>
+          '<div class="tile ' + (cls || '') + '"><span class="tk">' + k + '</span>'
+          + '<span class="tv' + (sm ? ' small' : '') + '">' + val + '</span>'
+          + '<span class="ts">' + sub + '</span></div>';
+        tiles.innerHTML =
+            tile('Attempts', h.length, 'squares dropped')
+          + tile('Final gap', gap === null ? '&middot;' : f4(gap), '|w &minus; &radic;A|')
+          + tile('Avg implied <span class="lc">&alpha;</span>', avg === null ? '&middot;' : f4(avg), 'step size, read back')
+          + tile('Verdict', v.label, v.note, v.tone, true);
+      }
+      drawChart();
+    };
+
+    window.addEventListener('resize', drawChart);
+    if (window.ResizeObserver && canvas) new ResizeObserver(drawChart).observe(canvas);
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', drawChart);
+    window.renderImplied();
+  })();
+
+  // ===== problem two, the code =====
+  (function(){
+    const ANS = {
+      1: ['area-w**2', 'area-w*w', 'area-(w**2)', 'area-(w*w)', 'area-pow(w,2)'],
+      2: ['w+alpha*l', 'w+l*alpha', 'w+(alpha*l)'],
+      3: ['abs(l)>tol', 'abs(l)>=tol', 'tol<abs(l)'],
+    };
+    const fb = document.getElementById('b_fb');
+    const out = document.getElementById('b_out');
+    const pre = document.getElementById('b_outpre');
+    document.getElementById('b_check').addEventListener('click', () => {
+      let bad = [];
+      for (const k of Object.keys(ANS)) {
+        const el = document.querySelector('input[data-b="' + k + '"]');
+        const ok = ANS[k].some(a => norm(a) === norm(el.value));
+        setState(el, ok);
+        if (!ok) bad.push(k);
+      }
+if (bad.length === 0) { say(fb, 'ok', 'Correct.'); showRun(); return; }
+out.hidden = true;
+say(fb, 'bad', bad.length + ' of 3 still open.');
+    });
+// The trace the finished loop prints, on the area problem two dealt out.
+function showRun(){
+  const area = P2.area, alpha = 0.01, tol = 1e-3;
+  let w = 1.0, l = 1.0, steps = 0;
+  const lines = ['<span class="pr">&gt;&gt;&gt; root(' + area + ')</span>'];
+  while (Math.abs(l) > tol && steps < 200) {
+    l = area - w * w;
+    w = w + alpha * l;
+    steps += 1;
+    lines.push('step ' + steps + ': w = ' + w.toFixed(4) + '  l = ' + l.toFixed(4));
+  }
+  lines.push('<span class="rv">(' + w.toFixed(6) + ', ' + steps + ')</span>');
+  pre.innerHTML = lines.join('\n');
+  out.hidden = false;
+}
+bindHint('b_hint', 'b_hintbox');
+  })();
+</script>
+</body>
+</html>
