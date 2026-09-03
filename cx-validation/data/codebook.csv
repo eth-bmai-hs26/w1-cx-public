@@ -1,0 +1,495 @@
+column_name,description,source,role
+gdp_per_capita_usd,"GDP per capita, current US dollars",World Bank WDI,target
+life_expectancy_at_birth,"Life expectancy at birth, total (years)",World Bank WDI,causal
+fertility_rate,"Fertility rate, total (births per woman)",World Bank WDI,causal
+infant_mortality_per_1000,"Mortality rate, infant (per 1,000 live births)",World Bank WDI,causal
+pct_urban_population,Urban population (% of total population),World Bank WDI,causal
+secondary_enrollment_gross,"School enrollment, secondary (% gross)",World Bank WDI,causal
+gross_capital_formation_pct_gdp,Gross capital formation (% of GDP),World Bank WDI,causal
+fdi_net_inflows_pct_gdp,"Foreign direct investment, net inflows (% of GDP)",World Bank WDI,causal
+gross_savings_pct_gdp,Gross savings (% of GDP),World Bank WDI,causal
+trade_pct_gdp,Trade (% of GDP),World Bank WDI,causal
+exports_pct_gdp,Exports of goods and services (% of GDP),World Bank WDI,causal
+pct_internet_users,Individuals using the Internet (% of population),World Bank WDI,causal
+mobile_subscriptions_per_100,Mobile cellular subscriptions (per 100 people),World Bank WDI,causal
+electric_power_consumption_kwh_pc,Electric power consumption (kWh per capita),World Bank WDI,causal
+inflation_consumer_prices_annual,"Inflation, consumer prices (annual %)",World Bank WDI,causal
+govt_consumption_pct_gdp,General government final consumption expenditure (% of GDP),World Bank WDI,causal
+total_natural_resources_rent_pct_gdp,Total natural resources rents (% of GDP),World Bank WDI,causal
+rule_of_law_index,Rule of Law Index,World Bank WGI,causal
+control_of_corruption_index,Control of Corruption Index,World Bank WGI,causal
+regulatory_quality_index,Regulatory Quality Index,World Bank WGI,causal
+government_effectiveness_index,Government Effectiveness Index,World Bank WGI,causal
+political_stability_index,Political Stability and Absence of Violence Index,World Bank WGI,causal
+voice_and_accountability_index,Voice and Accountability Index,World Bank WGI,causal
+pct_forest_area,Pct Forest Area,World Bank WDI,incidental
+pct_arable_land,Pct Arable Land,World Bank WDI,incidental
+pm25_air_pollution,Pm25 Air Pollution,World Bank WDI,incidental
+military_expenditure_pct_gdp,Military Expenditure Pct Gdp,World Bank WDI,incidental
+health_expenditure_pct_gdp,Health Expenditure Pct Gdp,World Bank WDI,incidental
+education_expenditure_pct_gdp,Education Expenditure Pct Gdp,World Bank WDI,incidental
+unemployment_rate,Unemployment Rate,World Bank WDI,incidental
+pct_employment_agriculture,Pct Employment Agriculture,World Bank WDI,incidental
+pct_employment_industry,Pct Employment Industry,World Bank WDI,incidental
+agriculture_value_added_pct_gdp,Agriculture Value Added Pct Gdp,World Bank WDI,incidental
+industry_value_added_pct_gdp,Industry Value Added Pct Gdp,World Bank WDI,incidental
+services_value_added_pct_gdp,Services Value Added Pct Gdp,World Bank WDI,incidental
+pct_electricity_from_renewables,Pct Electricity From Renewables,World Bank WDI,incidental
+pct_energy_from_renewables,Pct Energy From Renewables,World Bank WDI,incidental
+land_area_sq_km,Land Area Sq Km,World Bank WDI,incidental
+freshwater_withdrawal_pct,Freshwater Withdrawal Pct,World Bank WDI,incidental
+pct_smoking_prevalence,Pct Smoking Prevalence,World Bank WDI,incidental
+age_dependency_ratio,Age Dependency Ratio,World Bank WDI,incidental
+pct_population_over_65,Pct Population Over 65,World Bank WDI,incidental
+pct_population_under_15,Pct Population Under 15,World Bank WDI,incidental
+current_account_balance_pct_gdp,Current Account Balance Pct Gdp,World Bank WDI,incidental
+broad_money_pct_gdp,Broad Money Pct Gdp,World Bank WDI,incidental
+noncommunicable_disease_mortality_pct,Noncommunicable Disease Mortality Pct,World Bank WDI,incidental
+tuberculosis_incidence_per_100k,Tuberculosis Incidence Per 100K,World Bank WDI,incidental
+maternal_mortality_ratio,Maternal Mortality Ratio,World Bank WDI,incidental
+unesco_world_heritage_sites,UNESCO World Heritage Sites,UNESCO,spurious
+letters_in_country_name,Letters in country name,Computed,spurious
+vowels_in_country_name,Vowels in country name,Computed,spurious
+consonants_in_country_name,Consonants in country name,Computed,spurious
+words_in_country_name,Words in country name,Computed,spurious
+num_border_countries,Number of land borders,Wikipedia,spurious
+access_to_electricity_pct,Access To Electricity Pct,World Bank WDI,incidental
+energy_use_kg_oil_equiv_pc,Energy Use Kg Oil Equiv Pc,World Bank WDI,incidental
+energy_imports_pct_use,Energy Imports Pct Use,World Bank WDI,incidental
+fossil_fuel_energy_consumption_pct,Fossil Fuel Energy Consumption Pct,World Bank WDI,incidental
+electricity_from_coal_pct,Electricity From Coal Pct,World Bank WDI,incidental
+electricity_from_natural_gas_pct,Electricity From Natural Gas Pct,World Bank WDI,incidental
+electricity_from_nuclear_pct,Electricity From Nuclear Pct,World Bank WDI,incidental
+electricity_from_hydro_pct,Electricity From Hydro Pct,World Bank WDI,incidental
+electricity_from_oil_pct,Electricity From Oil Pct,World Bank WDI,incidental
+air_transport_departures,Air Transport Departures,World Bank WDI,incidental
+air_transport_passengers,Air Transport Passengers,World Bank WDI,incidental
+domestic_credit_to_private_sector_pct_gdp,Domestic Credit To Private Sector Pct Gdp,World Bank WDI,incidental
+reserves_months_imports,Reserves Months Imports,World Bank WDI,incidental
+labor_force_total,Labor Force Total,World Bank WDI,incidental
+labor_force_participation_rate,Labor Force Participation Rate,World Bank WDI,incidental
+labor_force_participation_female,Labor Force Participation Female,World Bank WDI,incidental
+labor_force_participation_male,Labor Force Participation Male,World Bank WDI,incidental
+employment_in_services_pct,Employment In Services Pct,World Bank WDI,incidental
+vulnerable_employment_pct,Vulnerable Employment Pct,World Bank WDI,incidental
+wage_and_salaried_workers_pct,Wage And Salaried Workers Pct,World Bank WDI,incidental
+self_employed_pct,Self Employed Pct,World Bank WDI,incidental
+population_growth_annual_pct,Population Growth Annual Pct,World Bank WDI,incidental
+birth_rate_crude_per_1000,Birth Rate Crude Per 1000,World Bank WDI,incidental
+death_rate_crude_per_1000,Death Rate Crude Per 1000,World Bank WDI,incidental
+survival_to_age_65_female,Survival To Age 65 Female,World Bank WDI,incidental
+survival_to_age_65_male,Survival To Age 65 Male,World Bank WDI,incidental
+population_ages_15_64_pct,Population Ages 15 64 Pct,World Bank WDI,incidental
+rural_population_pct,Rural Population Pct,World Bank WDI,incidental
+urban_population_growth_annual_pct,Urban Population Growth Annual Pct,World Bank WDI,incidental
+age_dependency_ratio_old,Age Dependency Ratio Old,World Bank WDI,incidental
+age_dependency_ratio_young,Age Dependency Ratio Young,World Bank WDI,incidental
+food_production_index,Food Production Index,World Bank WDI,incidental
+crop_production_index,Crop Production Index,World Bank WDI,incidental
+livestock_production_index,Livestock Production Index,World Bank WDI,incidental
+cereal_yield_kg_per_hectare,Cereal Yield Kg Per Hectare,World Bank WDI,incidental
+fertilizer_consumption_kg_per_hectare,Fertilizer Consumption Kg Per Hectare,World Bank WDI,incidental
+agricultural_land_pct,Agricultural Land Pct,World Bank WDI,incidental
+arable_land_pct_land_area,Arable Land Pct Land Area,World Bank WDI,incidental
+average_precipitation_mm_per_year,Average Precipitation Mm Per Year,World Bank WDI,incidental
+capture_fisheries_production_metric_tons,Capture Fisheries Production Metric Tons,World Bank WDI,incidental
+aquaculture_production_metric_tons,Aquaculture Production Metric Tons,World Bank WDI,incidental
+freshwater_withdrawals_agriculture_pct,Freshwater Withdrawals Agriculture Pct,World Bank WDI,incidental
+freshwater_withdrawals_industry_pct,Freshwater Withdrawals Industry Pct,World Bank WDI,incidental
+freshwater_withdrawals_domestic_pct,Freshwater Withdrawals Domestic Pct,World Bank WDI,incidental
+merchandise_trade_pct_gdp,Merchandise Trade Pct Gdp,World Bank WDI,incidental
+high_tech_exports_current_usd,High Tech Exports Current Usd,World Bank WDI,incidental
+high_tech_exports_pct_manufactured_exports,High Tech Exports Pct Manufactured Exports,World Bank WDI,incidental
+fuel_imports_pct_merchandise_imports,Fuel Imports Pct Merchandise Imports,World Bank WDI,incidental
+food_imports_pct_merchandise_imports,Food Imports Pct Merchandise Imports,World Bank WDI,incidental
+manufactures_imports_pct_merchandise_imports,Manufactures Imports Pct Merchandise Imports,World Bank WDI,incidental
+fuel_exports_pct_merchandise_exports,Fuel Exports Pct Merchandise Exports,World Bank WDI,incidental
+food_exports_pct_merchandise_exports,Food Exports Pct Merchandise Exports,World Bank WDI,incidental
+manufactures_exports_pct_merchandise_exports,Manufactures Exports Pct Merchandise Exports,World Bank WDI,incidental
+merchandise_exports_current_usd,Merchandise Exports Current Usd,World Bank WDI,incidental
+merchandise_imports_current_usd,Merchandise Imports Current Usd,World Bank WDI,incidental
+scientific_technical_journal_articles,Scientific Technical Journal Articles,World Bank WDI,incidental
+fixed_telephone_subscriptions_total,Fixed Telephone Subscriptions Total,World Bank WDI,incidental
+fixed_telephone_per_100,Fixed Telephone Per 100,World Bank WDI,incidental
+fixed_broadband_subscriptions,Fixed Broadband Subscriptions,World Bank WDI,incidental
+fixed_broadband_per_100,Fixed Broadband Per 100,World Bank WDI,incidental
+secure_internet_servers,Secure Internet Servers,World Bank WDI,incidental
+secure_internet_servers_per_million,Secure Internet Servers Per Million,World Bank WDI,incidental
+immunization_dpt_pct_children,Immunization Dpt Pct Children,World Bank WDI,incidental
+immunization_measles_pct_children,Immunization Measles Pct Children,World Bank WDI,incidental
+school_enrollment_primary_gross,School Enrollment Primary Gross,World Bank WDI,incidental
+synthetic_noise_90,Synthetic noise feature 90,Synthetic (random),spurious
+synthetic_noise_91,Synthetic noise feature 91,Synthetic (random),spurious
+synthetic_noise_92,Synthetic noise feature 92,Synthetic (random),spurious
+synthetic_noise_93,Synthetic noise feature 93,Synthetic (random),spurious
+synthetic_noise_94,Synthetic noise feature 94,Synthetic (random),spurious
+synthetic_noise_95,Synthetic noise feature 95,Synthetic (random),spurious
+synthetic_noise_96,Synthetic noise feature 96,Synthetic (random),spurious
+synthetic_noise_97,Synthetic noise feature 97,Synthetic (random),spurious
+synthetic_noise_98,Synthetic noise feature 98,Synthetic (random),spurious
+synthetic_noise_99,Synthetic noise feature 99,Synthetic (random),spurious
+synthetic_noise_100,Synthetic noise feature 100,Synthetic (random),spurious
+synthetic_noise_101,Synthetic noise feature 101,Synthetic (random),spurious
+synthetic_noise_102,Synthetic noise feature 102,Synthetic (random),spurious
+synthetic_noise_103,Synthetic noise feature 103,Synthetic (random),spurious
+synthetic_noise_104,Synthetic noise feature 104,Synthetic (random),spurious
+synthetic_noise_105,Synthetic noise feature 105,Synthetic (random),spurious
+synthetic_noise_106,Synthetic noise feature 106,Synthetic (random),spurious
+synthetic_noise_107,Synthetic noise feature 107,Synthetic (random),spurious
+synthetic_noise_108,Synthetic noise feature 108,Synthetic (random),spurious
+synthetic_noise_109,Synthetic noise feature 109,Synthetic (random),spurious
+synthetic_noise_110,Synthetic noise feature 110,Synthetic (random),spurious
+synthetic_noise_111,Synthetic noise feature 111,Synthetic (random),spurious
+synthetic_noise_112,Synthetic noise feature 112,Synthetic (random),spurious
+synthetic_noise_113,Synthetic noise feature 113,Synthetic (random),spurious
+synthetic_noise_114,Synthetic noise feature 114,Synthetic (random),spurious
+synthetic_noise_115,Synthetic noise feature 115,Synthetic (random),spurious
+synthetic_noise_116,Synthetic noise feature 116,Synthetic (random),spurious
+synthetic_noise_117,Synthetic noise feature 117,Synthetic (random),spurious
+synthetic_noise_118,Synthetic noise feature 118,Synthetic (random),spurious
+synthetic_noise_119,Synthetic noise feature 119,Synthetic (random),spurious
+airports_total,Total number of airports,CIA World Factbook/Wikipedia,spurious
+latitude_abs,Absolute latitude (distance from equator),Geographic,incidental
+average_elevation_m,Average elevation above sea level (meters),Geographic,incidental
+coastline_length_km,Coastline length (km),Geographic,incidental
+number_of_islands,Number of islands,Geographic,incidental
+mammal_species_count,Number of mammal species,Ecological,incidental
+bird_species_count,Number of bird species,Ecological,incidental
+endemic_species_count,Number of endemic species,Ecological,incidental
+max_daylight_hours,Maximum daylight hours (summer solstice),Astronomical,incidental
+daylight_variation_hours,Seasonal daylight variation (hours),Astronomical,incidental
+documented_history_years,Years of documented written history,Historical,incidental
+years_since_independence,Years since independence (2024 reference),Historical,incidental
+admin_divisions_count,Number of first-level administrative divisions,Administrative,incidental
+government_system_type,"Government system (0=parl, 1=pres, 2=semi-pres, 3=other)",Administrative,incidental
+primary_writing_system,"Primary writing system (0=Latin, 1=Cyrillic, 2=Arabic, 3=Chinese, 4=Other)",Linguistic,incidental
+num_official_languages,Number of official languages,Linguistic,incidental
+first_letter_position,"Alphabetical position of first letter (A=1, Z=26)",Derived from country name,spurious
+last_letter_position,"Alphabetical position of last letter (A=1, Z=26)",Derived from country name,spurious
+syllables_in_country_name,Approximate number of syllables in country name,Derived from country name,spurious
+unique_letters_count,Number of unique letters in country name,Derived from country name,spurious
+vowel_to_consonant_ratio,Ratio of vowels to consonants in country name,Derived from country name,spurious
+repeated_letters_count,"Number of repeated letters in country name (e.g., Philippines has repeated p)",Derived from country name,spurious
+longest_consonant_cluster,Length of longest consonant cluster in country name,Derived from country name,spurious
+name_numerology_score,Numerology score: sum of alphabetical positions of all letters,Derived from country name (pseudoscience),spurious
+name_lucky_number,"Lucky number from numerology (score mod 9, range 1-9)",Derived from country name (pseudoscience),spurious
+country_name_alphabetical_rank,"Alphabetical ranking of country name (1=first, 254=last)",Derived from country name,spurious
+prestige_score,Combined prestige score: UNESCO sites + Michelin stars + Olympic medals,Derived from cultural and sporting achievement data,spurious
+airports_per_1000_sqkm,Number of airports per 1000 km² of land area,Derived from airport count and area data,spurious
+unesco_sites_per_1000_sqkm,UNESCO World Heritage Sites per 1000 km² of land area,Derived from UNESCO data and area data,spurious
+rail_lines_total_km,Total railway line length in km,World Bank WDI (IS.RRS.TOTL.KM),incidental
+air_freight_million_ton_km,Air freight in million ton-km,World Bank WDI (IS.AIR.GOOD.MT.K1),incidental
+container_port_traffic,Container port traffic (TEU),World Bank WDI (IS.SHP.GOOD.TU),incidental
+forest_area_sq_km,Forest area in sq km,World Bank WDI (AG.LND.FRST.K2),incidental
+marine_protected_areas_pct,Marine protected areas as % of territorial waters,World Bank WDI (ER.MRN.PTMR.ZS),incidental
+terrestrial_protected_areas_pct,Terrestrial protected areas as % of total land,World Bank WDI (ER.LND.PTLD.ZS),incidental
+atms_per_100k_adults,"ATMs per 100,000 adults",World Bank WDI (FB.ATM.TOTL.P5),incidental
+bank_branches_per_100k,"Commercial bank branches per 100,000 adults",World Bank WDI (FB.CBK.BRCH.P5),incidental
+stock_market_cap_pct_gdp,Market capitalization of listed companies % GDP,World Bank WDI (CM.MKT.LCAP.GD.ZS),incidental
+listed_domestic_companies,Number of listed domestic companies,World Bank WDI (CM.MKT.LDOM.NO),incidental
+remittances_received_usd,Personal remittances received in USD,World Bank WDI (BX.TRF.PWKR.CD.DT),incidental
+tax_revenue_pct_gdp,Tax revenue as % of GDP,World Bank WDI (GC.TAX.TOTL.GD.ZS),incidental
+govt_debt_pct_gdp,Central government debt as % of GDP,World Bank WDI (GC.DOD.TOTL.GD.ZS),incidental
+internet_users_pct,Individuals using the Internet %,World Bank WDI (IT.NET.USER.ZS),incidental
+patent_applications_residents,Patent applications by residents,World Bank WDI (IP.PAT.RESD),incidental
+patent_applications_nonresidents,Patent applications by non-residents,World Bank WDI (IP.PAT.NRES),incidental
+research_development_pct_gdp,Research and development expenditure % GDP,World Bank WDI (GB.XPD.RSDV.GD.ZS),incidental
+life_expectancy_male,Life expectancy at birth male,World Bank WDI (SP.DYN.LE00.MA.IN),incidental
+life_expectancy_female,Life expectancy at birth female,World Bank WDI (SP.DYN.LE00.FE.IN),incidental
+dependency_ratio_total,Age dependency ratio total,World Bank WDI (SP.POP.DPND),incidental
+suicide_rate_per_100k,"Suicide mortality rate per 100,000",World Bank WDI (SH.STA.SUIC.P5),incidental
+alcohol_consumption_liters_pc,Total alcohol consumption per capita liters,World Bank WDI (SH.ALC.PCAP.LI),incidental
+smoking_prevalence_male,Smoking prevalence males %,World Bank WDI (SH.PRV.SMOK.MA),incidental
+smoking_prevalence_female,Smoking prevalence females %,World Bank WDI (SH.PRV.SMOK.FE),incidental
+urban_population_pct,Urban population %,World Bank WDI (SP.URB.TOTL.IN.ZS),incidental
+population_total,Total population,World Bank WDI (SP.POP.TOTL),incidental
+education_expenditure_total_pct_gdp,Government expenditure on education % GDP,World Bank WDI (SE.XPD.TOTL.GD.ZS),incidental
+tertiary_enrollment_gross,Gross enrollment ratio tertiary education,World Bank WDI (SE.TER.ENRR),incidental
+literacy_rate_adult,Literacy rate adult %,World Bank WDI (SE.ADT.LITR.ZS),incidental
+international_tourist_arrivals,International tourism number of arrivals,World Bank WDI (ST.INT.ARVL),incidental
+tourism_receipts_usd,International tourism receipts in USD,World Bank WDI (ST.INT.RCPT.CD),incidental
+international_tourist_departures,International tourism number of departures,World Bank WDI (ST.INT.DPRT),incidental
+tourism_expenditure_usd,International tourism expenditures in USD,World Bank WDI (ST.INT.XPND.CD),incidental
+scrabble_score_country_name,Scrabble score of country name (English letter values),Derived from country name,spurious
+letters_shared_with_usa,"Number of unique letters shared with ""United States""",Derived from country name,spurious
+letters_shared_with_switzerland,"Number of unique letters shared with ""Switzerland""",Derived from country name,spurious
+fibonacci_name_distance,Distance of letter count to nearest Fibonacci number,Derived from country name (pseudoscience),spurious
+prime_name_distance,Distance of letter count to nearest prime number,Derived from country name (pseudoscience),spurious
+golden_ratio_name_distance,Distance of vowel/consonant ratio to golden ratio (0.618),Derived from country name (pseudoscience),spurious
+reverse_alphabetical_rank,"Reverse alphabetical ranking (254=first alphabetically, 1=last)",Derived from country name,spurious
+name_rhythmic_score,Fraction of consecutive letter pairs that alternate vowel/consonant,Derived from country name,spurious
+iso_numeric_code,ISO 3166-1 numeric country code (arbitrary number assigned by ISO),ISO 3166-1,spurious
+country_calling_code,"International telephone calling code (e.g., +1 for USA, +44 for UK)",ITU,spurious
+capital_name_length,Number of characters in capital city name,Derived from capital city name,spurious
+capital_scrabble_score,Scrabble score of capital city name,Derived from capital city name,spurious
+capital_numerology_score,Numerology score of capital city name (sum of letter positions),Derived from capital city name (pseudoscience),spurious
+capital_vowel_count,Number of vowels in capital city name,Derived from capital city name,spurious
+capital_syllable_count,Approximate syllable count of capital city name,Derived from capital city name,spurious
+country_plus_capital_length,Total letter count of country name + capital city name,Derived from country and capital names,spurious
+flag_colors_count,Number of distinct colors in national flag,Vexillology data,spurious
+passport_visa_free_destinations,Number of destinations accessible visa-free or visa-on-arrival,Henley Passport Index 2023,spurious
+average_male_height_cm,Average adult male height in centimeters,NCD Risk Factor Collaboration / WHO,spurious
+national_holidays_per_year,Number of official national public holidays per year,Various government sources,spurious
+highest_peak_meters,Height of highest mountain peak in meters,Various geographic sources,spurious
+football_association_founded,Year the national football (soccer) association was founded,FIFA,spurious
+national_anthem_duration_sec,Duration of national anthem in seconds,Various musicological sources,spurious
+observed_inclusion_benchmark_1,Weighted governance proxy,Derived (computed),spurious
+transversal_vitality_benchmark_2,Regional prosperity indicator,Derived (computed),spurious
+demographic_capacity_measure_3,Aggregated institutional measure,Derived (computed),spurious
+social_convergence_estimator_4,Comparative equity measure,Derived (computed),spurious
+multifactorial_engagement_index_5,Systemic cohesion factor,Derived (computed),spurious
+relative_adaptation_index_6,Regional prosperity indicator,Derived (computed),spurious
+multifactorial_mobility_value_7,Comparative equity measure,Derived (computed),spurious
+relative_vitality_score_8,Longitudinal stability metric,Derived (computed),spurious
+transversal_equity_factor_9,Longitudinal stability metric,Derived (computed),spurious
+demographic_adaptation_estimator_10,Comparative equity measure,Derived (computed),spurious
+adjusted_engagement_metric_11,Normalized welfare benchmark,Derived (computed),spurious
+structural_growth_proxy_12,Weighted governance proxy,Derived (computed),spurious
+weighted_productivity_score_13,Composite development metric,Derived (computed),spurious
+social_prosperity_quotient_14,Empirical resilience score,Derived (computed),spurious
+longitudinal_growth_metric_15,Empirical resilience score,Derived (computed),spurious
+regional_capacity_factor_16,Analytical growth coefficient,Derived (computed),spurious
+analytical_adaptation_estimator_17,Systemic cohesion factor,Derived (computed),spurious
+observed_inclusion_proxy_18,Derived socioeconomic indicator,Derived (computed),spurious
+analytical_development_estimator_19,Weighted governance proxy,Derived (computed),spurious
+transversal_productivity_measure_20,Aggregated institutional measure,Derived (computed),spurious
+sectoral_resilience_parameter_21,Multifactorial development index,Derived (computed),spurious
+structural_infrastructure_measure_22,Systemic cohesion factor,Derived (computed),spurious
+integrated_vitality_coefficient_23,Comparative equity measure,Derived (computed),spurious
+economic_growth_measure_24,Integrated progress parameter,Derived (computed),spurious
+cultural_welfare_factor_25,Observed participation rate,Derived (computed),spurious
+cultural_resilience_parameter_26,Multifactorial development index,Derived (computed),spurious
+adjusted_inclusion_value_27,Empirical resilience score,Derived (computed),spurious
+aggregate_opportunity_value_28,Multifactorial development index,Derived (computed),spurious
+observed_stability_signal_29,Structural capacity estimator,Derived (computed),spurious
+derived_sustainability_proxy_30,Normalized welfare benchmark,Derived (computed),spurious
+transversal_participation_estimator_31,Composite development metric,Derived (computed),spurious
+estimated_adaptation_factor_32,Integrated progress parameter,Derived (computed),spurious
+relative_growth_score_33,Comparative equity measure,Derived (computed),spurious
+empirical_adaptation_coefficient_34,Comparative equity measure,Derived (computed),spurious
+regional_adaptation_score_35,Analytical growth coefficient,Derived (computed),spurious
+structural_prosperity_measure_36,Regional prosperity indicator,Derived (computed),spurious
+cultural_opportunity_parameter_37,Systemic cohesion factor,Derived (computed),spurious
+progressive_convergence_rate_38,Normalized welfare benchmark,Derived (computed),spurious
+national_heritage_estimator_39,Comparative equity measure,Derived (computed),spurious
+economic_productivity_factor_40,Derived socioeconomic indicator,Derived (computed),spurious
+holistic_governance_metric_41,Systemic cohesion factor,Derived (computed),spurious
+cultural_development_indicator_42,Comparative equity measure,Derived (computed),spurious
+relative_prosperity_coefficient_43,Normalized welfare benchmark,Derived (computed),spurious
+holistic_prosperity_measure_44,Structural capacity estimator,Derived (computed),spurious
+integrated_mobility_index_45,Longitudinal stability metric,Derived (computed),spurious
+economic_heritage_estimator_46,Regional prosperity indicator,Derived (computed),spurious
+national_welfare_value_47,Aggregated institutional measure,Derived (computed),spurious
+adjusted_development_measure_48,Multifactorial development index,Derived (computed),spurious
+comparative_adaptation_rate_49,Composite development metric,Derived (computed),spurious
+economic_equity_estimator_50,Empirical resilience score,Derived (computed),spurious
+systemic_productivity_metric_51,Derived socioeconomic indicator,Derived (computed),spurious
+institutional_resilience_benchmark_52,Multifactorial development index,Derived (computed),spurious
+economic_opportunity_indicator_53,Normalized welfare benchmark,Derived (computed),spurious
+analytical_heritage_benchmark_54,Derived socioeconomic indicator,Derived (computed),spurious
+developmental_capacity_score_55,Comparative equity measure,Derived (computed),spurious
+economic_adaptation_proxy_56,Composite development metric,Derived (computed),spurious
+social_participation_indicator_57,Analytical growth coefficient,Derived (computed),spurious
+cultural_stability_index_58,Comparative equity measure,Derived (computed),spurious
+analytical_capacity_coefficient_59,Aggregated institutional measure,Derived (computed),spurious
+integrated_growth_benchmark_60,Aggregated institutional measure,Derived (computed),spurious
+transversal_participation_measure_61,Regional prosperity indicator,Derived (computed),spurious
+foundational_development_estimator_62,Observed participation rate,Derived (computed),spurious
+multifactorial_mobility_indicator_63,Normalized welfare benchmark,Derived (computed),spurious
+holistic_growth_estimator_64,Comparative equity measure,Derived (computed),spurious
+developmental_welfare_estimator_65,Longitudinal stability metric,Derived (computed),spurious
+holistic_cohesion_factor_66,Observed participation rate,Derived (computed),spurious
+cultural_heritage_value_67,Analytical growth coefficient,Derived (computed),spurious
+economic_efficiency_rate_68,Empirical resilience score,Derived (computed),spurious
+economic_capacity_signal_69,Weighted governance proxy,Derived (computed),spurious
+sectoral_progress_metric_70,Empirical resilience score,Derived (computed),spurious
+adjusted_sustainability_quotient_71,Multifactorial development index,Derived (computed),spurious
+empirical_welfare_metric_72,Longitudinal stability metric,Derived (computed),spurious
+multifactorial_equity_rate_73,Normalized welfare benchmark,Derived (computed),spurious
+cultural_capacity_signal_74,Comparative equity measure,Derived (computed),spurious
+empirical_inclusion_estimator_75,Composite development metric,Derived (computed),spurious
+regional_participation_parameter_76,Empirical resilience score,Derived (computed),spurious
+systemic_progress_quotient_77,Observed participation rate,Derived (computed),spurious
+institutional_development_measure_78,Structural capacity estimator,Derived (computed),spurious
+institutional_equity_score_79,Integrated progress parameter,Derived (computed),spurious
+estimated_inclusion_indicator_80,Multifactorial development index,Derived (computed),spurious
+integrated_transformation_metric_81,Systemic cohesion factor,Derived (computed),spurious
+holistic_convergence_value_82,Aggregated institutional measure,Derived (computed),spurious
+empirical_resilience_parameter_83,Structural capacity estimator,Derived (computed),spurious
+relative_engagement_index_84,Empirical resilience score,Derived (computed),spurious
+estimated_participation_rate_85,Weighted governance proxy,Derived (computed),spurious
+cultural_mobility_proxy_86,Multifactorial development index,Derived (computed),spurious
+empirical_welfare_estimator_87,Empirical resilience score,Derived (computed),spurious
+institutional_participation_rate_88,Analytical growth coefficient,Derived (computed),spurious
+institutional_inclusion_index_89,Comparative equity measure,Derived (computed),spurious
+institutional_growth_parameter_90,Empirical resilience score,Derived (computed),spurious
+structural_stability_index_91,Comparative equity measure,Derived (computed),spurious
+empirical_progress_quotient_92,Structural capacity estimator,Derived (computed),spurious
+systemic_progress_parameter_93,Aggregated institutional measure,Derived (computed),spurious
+analytical_resilience_proxy_94,Normalized welfare benchmark,Derived (computed),spurious
+holistic_heritage_measure_95,Systemic cohesion factor,Derived (computed),spurious
+multifactorial_development_index_96,Analytical growth coefficient,Derived (computed),spurious
+relative_welfare_index_97,Derived socioeconomic indicator,Derived (computed),spurious
+comparative_growth_proxy_98,Analytical growth coefficient,Derived (computed),spurious
+observed_opportunity_metric_99,Aggregated institutional measure,Derived (computed),spurious
+national_capacity_proxy_100,Empirical resilience score,Derived (computed),spurious
+sectoral_engagement_score_101,Structural capacity estimator,Derived (computed),spurious
+sectoral_progress_parameter_102,Aggregated institutional measure,Derived (computed),spurious
+analytical_engagement_measure_103,Empirical resilience score,Derived (computed),spurious
+multifactorial_productivity_factor_104,Observed participation rate,Derived (computed),spurious
+derived_opportunity_value_105,Composite development metric,Derived (computed),spurious
+progressive_engagement_quotient_106,Derived socioeconomic indicator,Derived (computed),spurious
+regional_productivity_coefficient_107,Integrated progress parameter,Derived (computed),spurious
+social_heritage_estimator_108,Regional prosperity indicator,Derived (computed),spurious
+derived_convergence_quotient_109,Multifactorial development index,Derived (computed),spurious
+transversal_prosperity_quotient_110,Aggregated institutional measure,Derived (computed),spurious
+comparative_progress_measure_111,Integrated progress parameter,Derived (computed),spurious
+systemic_adaptation_factor_112,Empirical resilience score,Derived (computed),spurious
+integrated_capacity_indicator_113,Composite development metric,Derived (computed),spurious
+cultural_vitality_factor_114,Aggregated institutional measure,Derived (computed),spurious
+aggregate_governance_coefficient_115,Structural capacity estimator,Derived (computed),spurious
+social_vitality_value_116,Weighted governance proxy,Derived (computed),spurious
+holistic_vitality_factor_117,Integrated progress parameter,Derived (computed),spurious
+structural_inclusion_measure_118,Derived socioeconomic indicator,Derived (computed),spurious
+analytical_stability_estimator_119,Regional prosperity indicator,Derived (computed),spurious
+social_sustainability_rate_120,Weighted governance proxy,Derived (computed),spurious
+comparative_transformation_rate_121,Structural capacity estimator,Derived (computed),spurious
+progressive_productivity_parameter_122,Integrated progress parameter,Derived (computed),spurious
+regional_resilience_indicator_123,Regional prosperity indicator,Derived (computed),spurious
+aggregate_productivity_measure_124,Structural capacity estimator,Derived (computed),spurious
+normalized_vitality_estimator_125,Derived socioeconomic indicator,Derived (computed),spurious
+progressive_resilience_measure_126,Longitudinal stability metric,Derived (computed),spurious
+normalized_growth_signal_127,Comparative equity measure,Derived (computed),spurious
+derived_resilience_estimator_128,Structural capacity estimator,Derived (computed),spurious
+developmental_resilience_value_129,Integrated progress parameter,Derived (computed),spurious
+aggregate_infrastructure_coefficient_130,Aggregated institutional measure,Derived (computed),spurious
+empirical_prosperity_signal_131,Composite development metric,Derived (computed),spurious
+progressive_development_estimator_132,Weighted governance proxy,Derived (computed),spurious
+comparative_progress_rate_133,Comparative equity measure,Derived (computed),spurious
+social_vitality_signal_134,Normalized welfare benchmark,Derived (computed),spurious
+social_adaptation_rate_135,Derived socioeconomic indicator,Derived (computed),spurious
+observed_heritage_indicator_136,Aggregated institutional measure,Derived (computed),spurious
+transversal_equity_estimator_137,Derived socioeconomic indicator,Derived (computed),spurious
+foundational_heritage_coefficient_138,Structural capacity estimator,Derived (computed),spurious
+economic_convergence_index_139,Structural capacity estimator,Derived (computed),spurious
+multifactorial_governance_benchmark_140,Empirical resilience score,Derived (computed),spurious
+derived_opportunity_coefficient_141,Weighted governance proxy,Derived (computed),spurious
+systemic_sustainability_indicator_142,Observed participation rate,Derived (computed),spurious
+holistic_vitality_index_143,Composite development metric,Derived (computed),spurious
+estimated_equity_coefficient_144,Composite development metric,Derived (computed),spurious
+derived_efficiency_measure_145,Regional prosperity indicator,Derived (computed),spurious
+regional_governance_parameter_146,Composite development metric,Derived (computed),spurious
+analytical_infrastructure_score_147,Structural capacity estimator,Derived (computed),spurious
+regional_welfare_index_148,Normalized welfare benchmark,Derived (computed),spurious
+developmental_infrastructure_score_149,Systemic cohesion factor,Derived (computed),spurious
+normalized_opportunity_rate_150,Systemic cohesion factor,Derived (computed),spurious
+adjusted_stability_indicator_151,Derived socioeconomic indicator,Derived (computed),spurious
+normalized_development_rate_152,Analytical growth coefficient,Derived (computed),spurious
+weighted_vitality_signal_153,Analytical growth coefficient,Derived (computed),spurious
+relative_welfare_benchmark_154,Derived socioeconomic indicator,Derived (computed),spurious
+derived_sustainability_index_155,Derived socioeconomic indicator,Derived (computed),spurious
+progressive_engagement_benchmark_156,Multifactorial development index,Derived (computed),spurious
+systemic_infrastructure_signal_157,Empirical resilience score,Derived (computed),spurious
+derived_cohesion_proxy_158,Observed participation rate,Derived (computed),spurious
+demographic_prosperity_benchmark_159,Aggregated institutional measure,Derived (computed),spurious
+systemic_efficiency_signal_160,Composite development metric,Derived (computed),spurious
+transversal_transformation_indicator_161,Derived socioeconomic indicator,Derived (computed),spurious
+demographic_governance_rate_162,Longitudinal stability metric,Derived (computed),spurious
+holistic_growth_quotient_163,Normalized welfare benchmark,Derived (computed),spurious
+adjusted_governance_metric_164,Systemic cohesion factor,Derived (computed),spurious
+weighted_efficiency_parameter_165,Derived socioeconomic indicator,Derived (computed),spurious
+regional_efficiency_indicator_166,Multifactorial development index,Derived (computed),spurious
+economic_growth_proxy_167,Analytical growth coefficient,Derived (computed),spurious
+transversal_engagement_indicator_168,Systemic cohesion factor,Derived (computed),spurious
+observed_adaptation_estimator_169,Integrated progress parameter,Derived (computed),spurious
+sectoral_engagement_factor_170,Integrated progress parameter,Derived (computed),spurious
+empirical_stability_measure_171,Regional prosperity indicator,Derived (computed),spurious
+holistic_prosperity_index_172,Structural capacity estimator,Derived (computed),spurious
+normalized_governance_rate_173,Aggregated institutional measure,Derived (computed),spurious
+aggregate_development_index_174,Analytical growth coefficient,Derived (computed),spurious
+national_development_benchmark_175,Composite development metric,Derived (computed),spurious
+demographic_inclusion_index_176,Multifactorial development index,Derived (computed),spurious
+progressive_resilience_parameter_177,Multifactorial development index,Derived (computed),spurious
+adjusted_inclusion_index_178,Comparative equity measure,Derived (computed),spurious
+relative_opportunity_quotient_179,Longitudinal stability metric,Derived (computed),spurious
+estimated_productivity_rate_180,Systemic cohesion factor,Derived (computed),spurious
+integrated_productivity_parameter_181,Composite development metric,Derived (computed),spurious
+analytical_capacity_value_182,Analytical growth coefficient,Derived (computed),spurious
+demographic_opportunity_benchmark_183,Composite development metric,Derived (computed),spurious
+weighted_cohesion_metric_184,Normalized welfare benchmark,Derived (computed),spurious
+holistic_inclusion_value_185,Multifactorial development index,Derived (computed),spurious
+longitudinal_prosperity_value_186,Weighted governance proxy,Derived (computed),spurious
+relative_growth_quotient_187,Aggregated institutional measure,Derived (computed),spurious
+holistic_resilience_signal_188,Normalized welfare benchmark,Derived (computed),spurious
+composite_opportunity_score_189,Observed participation rate,Derived (computed),spurious
+composite_infrastructure_index_190,Aggregated institutional measure,Derived (computed),spurious
+aggregate_adaptation_value_191,Composite development metric,Derived (computed),spurious
+integrated_growth_value_192,Multifactorial development index,Derived (computed),spurious
+progressive_progress_factor_193,Observed participation rate,Derived (computed),spurious
+transversal_sustainability_value_194,Systemic cohesion factor,Derived (computed),spurious
+normalized_prosperity_metric_195,Composite development metric,Derived (computed),spurious
+adjusted_growth_coefficient_196,Comparative equity measure,Derived (computed),spurious
+relative_sustainability_value_197,Observed participation rate,Derived (computed),spurious
+demographic_governance_quotient_198,Composite development metric,Derived (computed),spurious
+systemic_progress_metric_199,Composite development metric,Derived (computed),spurious
+developmental_adaptation_proxy_200,Empirical resilience score,Derived (computed),spurious
+national_growth_quotient_201,Weighted governance proxy,Derived (computed),spurious
+cultural_engagement_value_202,Aggregated institutional measure,Derived (computed),spurious
+economic_welfare_factor_203,Regional prosperity indicator,Derived (computed),spurious
+multifactorial_development_indicator_204,Weighted governance proxy,Derived (computed),spurious
+progressive_heritage_parameter_205,Integrated progress parameter,Derived (computed),spurious
+demographic_participation_benchmark_206,Composite development metric,Derived (computed),spurious
+cultural_growth_benchmark_207,Observed participation rate,Derived (computed),spurious
+systemic_inclusion_score_208,Aggregated institutional measure,Derived (computed),spurious
+regional_opportunity_measure_209,Regional prosperity indicator,Derived (computed),spurious
+transversal_sustainability_coefficient_210,Integrated progress parameter,Derived (computed),spurious
+aggregate_growth_metric_211,Weighted governance proxy,Derived (computed),spurious
+regional_transformation_index_212,Systemic cohesion factor,Derived (computed),spurious
+institutional_heritage_value_213,Composite development metric,Derived (computed),spurious
+systemic_resilience_indicator_214,Integrated progress parameter,Derived (computed),spurious
+estimated_governance_estimator_215,Aggregated institutional measure,Derived (computed),spurious
+observed_productivity_estimator_216,Weighted governance proxy,Derived (computed),spurious
+holistic_mobility_parameter_217,Multifactorial development index,Derived (computed),spurious
+analytical_convergence_index_218,Analytical growth coefficient,Derived (computed),spurious
+estimated_participation_benchmark_219,Normalized welfare benchmark,Derived (computed),spurious
+integrated_equity_indicator_220,Composite development metric,Derived (computed),spurious
+comparative_equity_rate_221,Derived socioeconomic indicator,Derived (computed),spurious
+regional_convergence_rate_222,Normalized welfare benchmark,Derived (computed),spurious
+foundational_welfare_metric_223,Derived socioeconomic indicator,Derived (computed),spurious
+relative_growth_index_224,Analytical growth coefficient,Derived (computed),spurious
+institutional_mobility_coefficient_225,Regional prosperity indicator,Derived (computed),spurious
+regional_stability_metric_226,Structural capacity estimator,Derived (computed),spurious
+analytical_opportunity_parameter_227,Weighted governance proxy,Derived (computed),spurious
+national_stability_index_228,Observed participation rate,Derived (computed),spurious
+aggregate_resilience_benchmark_229,Empirical resilience score,Derived (computed),spurious
+analytical_welfare_factor_230,Composite development metric,Derived (computed),spurious
+aggregate_efficiency_value_231,Systemic cohesion factor,Derived (computed),spurious
+multifactorial_productivity_estimator_232,Multifactorial development index,Derived (computed),spurious
+holistic_equity_signal_233,Structural capacity estimator,Derived (computed),spurious
+aggregate_vitality_score_234,Normalized welfare benchmark,Derived (computed),spurious
+transversal_growth_metric_235,Derived socioeconomic indicator,Derived (computed),spurious
+adjusted_cohesion_measure_236,Observed participation rate,Derived (computed),spurious
+sectoral_vitality_coefficient_237,Multifactorial development index,Derived (computed),spurious
+composite_mobility_quotient_238,Aggregated institutional measure,Derived (computed),spurious
+comparative_equity_factor_239,Weighted governance proxy,Derived (computed),spurious
+normalized_inclusion_parameter_240,Regional prosperity indicator,Derived (computed),spurious
+developmental_sustainability_benchmark_241,Derived socioeconomic indicator,Derived (computed),spurious
+relative_capacity_factor_242,Comparative equity measure,Derived (computed),spurious
+integrated_prosperity_value_243,Comparative equity measure,Derived (computed),spurious
+adjusted_inclusion_indicator_244,Comparative equity measure,Derived (computed),spurious
+derived_governance_rate_245,Observed participation rate,Derived (computed),spurious
+weighted_productivity_factor_246,Composite development metric,Derived (computed),spurious
+regional_productivity_estimator_247,Multifactorial development index,Derived (computed),spurious
+weighted_resilience_parameter_248,Empirical resilience score,Derived (computed),spurious
+estimated_opportunity_metric_249,Empirical resilience score,Derived (computed),spurious
+adjusted_capacity_estimator_250,Empirical resilience score,Derived (computed),spurious
+regional_stability_factor_251,Derived socioeconomic indicator,Derived (computed),spurious
+normalized_prosperity_coefficient_252,Systemic cohesion factor,Derived (computed),spurious
+regional_prosperity_rate_253,Longitudinal stability metric,Derived (computed),spurious
+demographic_productivity_value_254,Structural capacity estimator,Derived (computed),spurious
+systemic_adaptation_score_255,Empirical resilience score,Derived (computed),spurious
+holistic_cohesion_measure_256,Normalized welfare benchmark,Derived (computed),spurious
+analytical_governance_benchmark_257,Weighted governance proxy,Derived (computed),spurious
+developmental_participation_signal_258,Aggregated institutional measure,Derived (computed),spurious
+multifactorial_efficiency_signal_259,Composite development metric,Derived (computed),spurious
+adjusted_mobility_indicator_260,Composite development metric,Derived (computed),spurious
