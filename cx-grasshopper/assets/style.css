@@ -1,0 +1,648 @@
+/* ============================================================================
+   Grasshopper : shared editorial styles.
+   Theme tokens (light default + dark via [data-theme] on <html>), the page
+   shell, and the FULL reusable class vocabulary that the game views and the
+   explanation section draw with. No inline colours anywhere in the JS: every
+   fill and stroke routes through a token defined here.
+
+   Colour identities, fixed once so nothing cross-talks:
+     green  : the grasshopper, and a successful descent
+     amber  : revealed truth (the real floor, the real landscape)
+     blue   : the slope / gradient concept (tangent line, grad readout)
+     purple : the trail of where you have already been
+     red    : a miss (still on a slope when you stopped)
+   ============================================================================ */
+
+/* === theme tokens : LIGHT (lecture default) === */
+:root,
+:root[data-theme="light"] {
+  /* height of the sticky topbar: 14px padding twice plus a 32px row. Anything
+     that scrolls an anchor into view has to clear this. */
+  --topbar-h:      60px;
+
+  --bg:            #f9f7f1;   /* warm cream */
+  --panel:         #fffdf8;   /* card surface, a hair lighter than bg */
+  --panel-2:       #f2efe6;   /* inset / secondary surface */
+  --panel-3:       #ece9df;   /* deepest inset */
+  --ink:           #1a1a1a;
+  --muted:         #6b6b6b;
+  --faint:         #9a9488;
+  --rule:          #d8d4ca;   /* hairline */
+  --rule-strong:   #c4bfb2;
+
+  /* categorical palette */
+  --blue:   #2f6cb1;
+  --red:    #b8323a;
+  --amber:  #c08a3e;
+  --purple: #7a5c8c;
+  --green:  #4a8b6b;
+  --orange: #a05a2c;
+
+  /* landscape drawing */
+  --curve:         #33302a;   /* the profile line itself */
+  --curve-soft:    #8a8579;   /* the profile outside the visible window */
+  --ground:        #e4e0d3;   /* fill under the profile */
+  --ground-2:      #d6d1c1;   /* fill under the profile, world view */
+  --sky:           #fdfcf7;
+  --gridline:      #e6e2d7;
+  --axis:          #b3ada0;
+  --axis-ink:      #6b6b6b;
+
+  /* actors */
+  --hopper:        #3f7d5f;
+  --hopper-dark:   #2c5c45;
+  --hopper-ring:   #fffdf8;
+  --trail:         #7a5c8c;
+  --trail-faint:   #c3b3ce;
+  --peak:          #c08a3e;
+  --peak-soft:     #eadcc2;
+  --tangent:       #2f6cb1;
+  --flag:          #1a1a1a;
+
+  /* status */
+  --good:          #4a8b6b;
+  --good-bg:       #e2efe7;
+  --warn:          #c08a3e;
+  --warn-bg:       #f5ead6;
+  --bad:           #b8323a;
+  --bad-bg:        #f4e0e0;
+
+  /* controls */
+  --btn-bg:          #fffdf8;
+  --btn-ink:         #1a1a1a;
+  --btn-border:      #c4bfb2;
+  --btn-hover:       #f2efe6;
+  --btn-primary-bg:  #3f7d5f;
+  --btn-primary-ink: #ffffff;
+  --btn-primary-hov: #35684f;
+  --btn-disabled-bg: #f0ede4;
+  --btn-disabled:    #b7b2a6;
+  --slider-track:    #ddd8cc;
+  --slider-fill:     #3f7d5f;
+  --slider-thumb:    #3f7d5f;
+  --switch-off:      #cfc9bb;
+  --switch-on:       #3f7d5f;
+  --focus:           #2f6cb1;
+
+  --shadow: none;
+}
+
+/* === theme tokens : DARK (solo study) === */
+:root[data-theme="dark"] {
+  --bg:            #181612;
+  --panel:         #201d18;
+  --panel-2:       #262219;
+  --panel-3:       #2d281e;
+  --ink:           #ece7d9;
+  --muted:         #8a8579;
+  --faint:         #6b6759;
+  --rule:          #383530;
+  --rule-strong:   #4a463f;
+
+  --blue:   #6fa3d8;
+  --red:    #d97b80;
+  --amber:  #d1a04c;
+  --purple: #a98cc0;
+  --green:  #6cae8b;
+  --orange: #c9824f;
+
+  --curve:         #d9d3c3;
+  --curve-soft:    #6b6759;
+  /* The fills sit ABOVE the sky here, not below it. In the light theme the
+     ground is darker than the sky and --ground-2 is the darker of the two, so
+     the world view reads stronger. Mirroring "darker" into a dark theme moves
+     the fill towards the sky and erases it, so the direction flips: lighter
+     than the sky, and --ground-2 the lighter of the two. The two contrast
+     ratios against --sky match the light theme's, 1.29 and 1.49. */
+  --ground:        #322e27;
+  --ground-2:      #3c3831;
+  --sky:           #1c1a15;
+  --gridline:      #2b2822;
+  --axis:          #4d4941;
+  --axis-ink:      #8a8579;
+
+  --hopper:        #6cae8b;
+  --hopper-dark:   #a6d3ba;
+  --hopper-ring:   #181612;
+  --trail:         #a98cc0;
+  --trail-faint:   #574a63;
+  --peak:          #d1a04c;
+  --peak-soft:     #3d3322;
+  --tangent:       #6fa3d8;
+  --flag:          #ece7d9;
+
+  --good:          #6cae8b;
+  --good-bg:       #21301f;
+  --warn:          #d1a04c;
+  --warn-bg:       #332a1b;
+  --bad:           #d97b80;
+  --bad-bg:        #34211f;
+
+  --btn-bg:          #262219;
+  --btn-ink:         #ece7d9;
+  --btn-border:      #4a463f;
+  --btn-hover:       #322d23;
+  --btn-primary-bg:  #4f9070;
+  --btn-primary-ink: #10160f;
+  --btn-primary-hov: #5da680;
+  --btn-disabled-bg: #221f19;
+  --btn-disabled:    #56514a;
+  --slider-track:    #3a352d;
+  --slider-fill:     #6cae8b;
+  --slider-thumb:    #6cae8b;
+  --switch-off:      #45403a;
+  --switch-on:       #4f9070;
+  --focus:           #6fa3d8;
+
+  --shadow: none;
+}
+
+/* === reset-ish === */
+* { box-sizing: border-box; }
+
+/* the topbar is sticky, so an anchor jump to #game-root or #explain-root would
+   park the section heading underneath it without this */
+html {
+  scroll-padding-top: calc(var(--topbar-h) + 16px);
+  /* The gutter is held open whether or not the page currently scrolls. A
+     station that grows a row taller than the viewport would otherwise pull a
+     scrollbar in mid-read and take 15px off the width of everything, sliding
+     the very columns of numbers the reader is comparing. */
+  scrollbar-gutter: stable;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+}
+
+.wrap {
+  max-width: none;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* === topbar === */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--panel);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.brand-mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--hopper);
+  display: inline-block;
+}
+
+.brand-sub {
+  color: var(--muted);
+  font-size: 13.5px;
+  border-left: 1px solid var(--rule);
+  padding-left: 16px;
+}
+
+.topbar-right { margin-left: auto; display: flex; gap: 8px; }
+
+/* the intro text, reachable again from any station without leaving it: a
+   sheet that drops from the topbar and covers nothing but itself */
+.about-panel {
+  position: absolute;
+  top: 100%;
+  right: 28px;
+  width: min(560px, calc(100vw - 56px));
+  margin-top: 10px;
+  padding: 22px 26px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  z-index: 39;
+}
+.about-panel.is-hidden { display: none; }
+.about-panel h2 {
+  font-size: 26px;
+  margin: 0 0 14px;
+}
+.about-panel .lede {
+  max-width: none;
+  font-size: 20px;
+}
+.about-panel .lede:last-child {
+  margin-bottom: 0;
+}
+
+.theme-toggle {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  cursor: pointer;
+}
+.theme-toggle:hover { background: var(--btn-hover); }
+
+/* === hero ===
+   The opening runs the full width of the page and is centred: it is the only
+   block on the page with nothing beside it, and set at a column width it read
+   as half a page with a hole in it. Everything below stays left aligned, which
+   is where the reading actually happens. */
+.hero {
+  padding-top: 54px;
+  padding-bottom: 34px;
+  max-width: none;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(45px, 5.4vw, 69px);
+  line-height: 1.12;
+  max-width: none;
+  margin-bottom: 76px;
+}
+
+.hero .lede {
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 33px;
+}
+
+.hero-next {
+  margin-top: 68px;
+  padding: 11px 22px;
+  font-size: 15px;
+}
+
+.lede {
+  max-width: 34em;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.62;
+  margin: 0 0 14px;
+}
+
+/* === cards === */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--panel-2);
+}
+
+.card-title {
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.card-note {
+  color: var(--muted);
+  font-size: 22px;
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-body { padding: 14px 16px 16px; }
+
+.caption {
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1.45;
+  margin: 10px 0 0;
+}
+
+/* === section headings === */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 56px 0 22px;
+}
+.section-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+.section-kicker {
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* === buttons === */
+.btn {
+  font: inherit;
+  font-size: 22px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.btn:hover:not(:disabled) { background: var(--btn-hover); }
+.btn:disabled {
+  background: var(--btn-disabled-bg);
+  color: var(--btn-disabled);
+  border-color: var(--rule);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.btn-primary {
+  background: var(--btn-primary-bg);
+  border-color: var(--btn-primary-bg);
+  color: var(--btn-primary-ink);
+  font-weight: 600;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--btn-primary-hov);
+  border-color: var(--btn-primary-hov);
+}
+.btn-primary:disabled {
+  background: var(--btn-disabled-bg);
+  border-color: var(--rule);
+  color: var(--btn-disabled);
+}
+
+.btn-block { display: block; width: 100%; }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--rule);
+  color: var(--muted);
+  font-size: 13px;
+  padding: 6px 12px;
+}
+.btn-ghost:hover:not(:disabled) { background: var(--panel-2); color: var(--ink); }
+
+/* === labelled control groups === */
+.control-group { margin-bottom: 18px; }
+.control-group:last-child { margin-bottom: 0; }
+
+.control-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 22px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 7px;
+}
+.control-value {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  color: var(--ink);
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.control-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* === slider === */
+.slider-row { display: flex; align-items: center; gap: 10px; }
+
+input[type="range"].slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--slider-track);
+  outline: none;
+  margin: 8px 0;
+}
+input[type="range"].slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  cursor: pointer;
+  border: 2px solid var(--panel);
+}
+input[type="range"].slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  cursor: pointer;
+  border: 2px solid var(--panel);
+}
+input[type="range"].slider:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+
+input[type="number"].num-input,
+input[type="text"].num-input {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13.5px;
+  width: 74px;
+  padding: 6px 8px;
+  border: 1px solid var(--btn-border);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--ink);
+  text-align: right;
+}
+input.num-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+
+/* === KPI readouts === */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--panel-2);
+}
+.kpi {
+  padding: 9px 10px;
+  text-align: center;
+}
+.kpi + .kpi { border-left: 1px solid var(--rule); }
+.kpi-value {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.kpi-label {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 2px;
+}
+
+/* === status / verdict === */
+.verdict {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--rule);
+  border-left-width: 3px;
+  border-radius: 3px;
+  padding: 11px 13px;
+  font-size: 22px;
+  line-height: 1.5;
+}
+.verdict-title {
+  font-family: "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+.verdict.good { background: var(--good-bg); border-left-color: var(--good); }
+.verdict.good .verdict-title { color: var(--good); }
+.verdict.warn { background: var(--warn-bg); border-left-color: var(--warn); }
+.verdict.warn .verdict-title { color: var(--warn); }
+.verdict.bad  { background: var(--bad-bg);  border-left-color: var(--bad); }
+.verdict.bad .verdict-title { color: var(--bad); }
+
+/* === mono numbers inline === */
+.mono {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92em;
+}
+
+/* === shared SVG vocabulary === */
+svg { display: block; }
+svg text { font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif; }
+
+.sky        { fill: var(--sky); }
+.gridline   { stroke: var(--gridline); stroke-width: 1; }
+.axis-line  { stroke: var(--axis); stroke-width: 1; }
+.axis-ink   { fill: var(--axis-ink); font-size: 11px; }
+/* --muted, not --faint: at 11px an axis title has to clear 4.5:1, and --faint
+   only clears it as decorative chrome */
+.axis-title { fill: var(--muted); font-size: 11px; letter-spacing: 0.06em; }
+
+.ground       { fill: var(--ground); }
+.ground-world { fill: var(--ground-2); }
+.curve        { fill: none; stroke: var(--curve); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.curve-soft   { fill: none; stroke: var(--curve-soft); stroke-width: 1.6; }
+
+.tangent      { stroke: var(--tangent); stroke-width: 1.8; stroke-dasharray: 5 4; fill: none; }
+.tangent-ink  { fill: var(--tangent); font-size: 12px; font-weight: 600; }
+
+.trail-line { fill: none; stroke: var(--trail-faint); stroke-width: 1.4; stroke-dasharray: 3 3; }
+.trail-dot  { fill: var(--trail); fill-opacity: 0.5; stroke: none; }
+
+.peak-mark  { stroke: var(--peak); stroke-width: 1.6; stroke-dasharray: 4 4; }
+.peak-dot   { fill: var(--peak); }
+.peak-ink   { fill: var(--peak); font-size: 11.5px; font-weight: 600; }
+
+.hopper-body { fill: var(--hopper); }
+.hopper-dark { fill: var(--hopper-dark); }
+.hopper-ring { fill: none; stroke: var(--hopper-ring); stroke-width: 1.4; }
+
+.flag-pole { stroke: var(--flag); stroke-width: 1.6; }
+.flag-cloth { fill: var(--flag); }
+
+.window-band  { fill: var(--peak-soft); fill-opacity: 0.55; }
+.window-edge  { stroke: var(--peak); stroke-width: 1; stroke-opacity: 0.6; }
+
+.hz-line   { stroke: var(--rule-strong); stroke-width: 1; stroke-dasharray: 2 3; }
+.label-ink { fill: var(--muted); font-size: 11.5px; }
+
+kbd {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  padding: 1px 5px;
+  background: var(--panel-2);
+  color: var(--ink);
+}
+
+/* === katex sizing === */
+.katex { font-size: 1.02em; }
+.katex-display { margin: 0.6em 0; }
+
+/* === probes and the line through them ===
+   Purple is already "ground you have covered" in this palette, and a probe is
+   a place the grasshopper has read a height, so probes are purple. The secant
+   is drawn in the slope colour, solid, so that when the tangent (same colour,
+   dashed) is finally laid over it the two are visibly the same line. */
+.probe-drop { stroke: var(--trail-faint); stroke-width: 1; stroke-dasharray: 2 3; }
+.probe-dot  { fill: var(--trail); }
+.probe-ink  { fill: var(--trail); font-size: 12px; font-weight: 600; }
+.secant     { stroke: var(--tangent); stroke-width: 2; stroke-opacity: 0.9; fill: none; }
+/* the word that names the secant, in the secant's own colour */
+.slope-ink  { fill: var(--tangent); font-size: 11.5px; font-weight: 600; }
+.gap-mark   { stroke: var(--axis); stroke-width: 1; }
+.gap-ink    { fill: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.here-dot   { fill: var(--hopper); }
+
+/* a reading already taken and left on the picture, so several of them can sit
+   on one valley without competing with the one being taken now */
+.secant-past   { stroke: var(--tangent); stroke-width: 1.6; stroke-opacity: 0.4; fill: none; }
+.probe-dot-past { fill: var(--trail); fill-opacity: 0.45; }
+
+/* the stretch of ground one reading covers, on a view too wide for the two
+   probes to read as a pair on their own */
+.gap-band { fill: var(--trail-faint); fill-opacity: 0.34; }
