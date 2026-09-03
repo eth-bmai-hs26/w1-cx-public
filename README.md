@@ -16,6 +16,7 @@ The course website links to everything here:
 | Slot | Exercise | Open |
 |---|---|---|
 | Saturday 09:00 | **Iris PyTorch** | [Open in Colab](https://colab.research.google.com/github/eth-bmai-hs26/w1-cx-public/blob/main/iris-pytorch/iris_pytorch.ipynb) |
+| TBA | **Universal approximation** | [Open in Colab](https://colab.research.google.com/github/eth-bmai-hs26/w1-cx-public/blob/main/universal-approximation/universal_approximation.ipynb) |
 
 More weekend 1 exercises are added here as they are finished.
 
@@ -52,6 +53,46 @@ cell before concluding anything is wrong.
 The four things to try at the end of the notebook are the exercise: change the
 learning rate, change the hidden layer size, add a second hidden layer, and
 train for more or fewer epochs.
+
+## Universal approximation
+
+`universal-approximation/universal_approximation.ipynb` rebuilds the demand model of a
+fictional Zürich bike-sharing operator, VeloZüri, using NumPy only: no PyTorch, no
+TensorFlow, no GPU.
+
+The arc is one idea, earned in five steps. One neuron is a ReLU ramp, flat and then
+straight. Three ramps stacked make a bump. Four bumps and a dawn shelf, nineteen numbers
+chosen by hand, make a whole day of demand. Gradient descent then takes those knobs over,
+and a width sweep shows where buying more neurons stops paying for itself. The same idea
+with two inputs turns 700 surveyed sites into a city demand map and three depot
+locations. The last part shows five equally good models disagreeing wildly about the
+hours they were never shown.
+
+Five exercise cells are scaffolded. Each states what to build and which variable to put
+it in, and the unknowns are written as `...`. Everything else in the notebook already
+runs, so you fill in the decision and the plots follow.
+
+Prerequisites are Python basics. No prior machine learning is assumed, and no calculus:
+backpropagation is used and explained in words, never derived.
+
+Dependencies are `numpy`, `pandas` and `matplotlib`, all preinstalled in Colab. To run it
+on your own machine instead:
+
+```bash
+pip install -r universal-approximation/requirements.txt
+jupyter notebook universal-approximation/universal_approximation.ipynb
+```
+
+The three `universal_approximation_*.py` files next to the notebook hold the network, the
+data and every figure, which is what keeps the notebook cells about the argument rather
+than the plumbing. The notebook does not need them to be present: its setup cell carries
+a compressed copy of all three and unpacks them when they are missing, which is what
+makes the Colab link work on its own.
+
+The data sits in `universal-approximation/data/`. The notebook reads it from there if you
+cloned the repo, and over the network from this repository otherwise. No token and no
+account are needed. If both fail it rebuilds the same three CSVs from the seeded
+generator, so lecture hall wifi is never a dependency.
 
 ## Provenance
 
